@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style scoped>
+
 .recommendations-section {
     margin-bottom: 20px;
 }
@@ -47,16 +48,7 @@ export default {
     overflow-x: hidden;
 }
 
-.recommendation-item {
-    width: 270px;
-    height: 200px;
-    background-color: #fffdfd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-}
+
 
 .recommendation-content {
     display: flex;
@@ -86,4 +78,29 @@ export default {
     cursor: pointer;
     padding: 0 5px;
 }
+@media (max-width: 1024px) {
+    .recommendation-item {
+    width: 200px;
+    height: 100px;
+    background-color: #fffdfd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    }
+}
+@media (min-width: 600px) {
+    .recommendation-item {
+    width: 270px;
+    height: 200px;
+    background-color: #fffdfd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    }
+}
+
 </style>

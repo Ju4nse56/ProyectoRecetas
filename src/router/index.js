@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import InicioView from '@/views/InicioView.vue'
 import LoginPrincipal from '@/views/LoginPrincipal.vue'
 import HomeView from '@/views/HomeView.vue'
+import OlvidasteContrasena from '@/views/OlvidasteContrasena.vue'
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     path: '/HomeView',
     name: 'Home',
     component: HomeView
+  },
+  {
+    path: '/OlvidasteContrasena',
+    name: 'Contrasena',
+    component: OlvidasteContrasena
   }
 ]
 

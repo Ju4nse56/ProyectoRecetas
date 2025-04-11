@@ -67,7 +67,12 @@ export default {
 }
 
 /* Media query específica para tablets */
-@media (min-width: 600px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 600px) {
     .categories-grid {
         grid-template-columns: repeat(4, 1fr);
     }

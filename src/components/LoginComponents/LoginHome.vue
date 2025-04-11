@@ -14,9 +14,10 @@
         <br>
 
         <button class="login-btn" @click="navigateToHome">Log in</button>
-        <br>
+        
 
-        <div class="forgot-password">¿Olvidaste tu contraseña?</div>
+
+        <div class="forgot-password"><button type="button" class="btn btn-primary" @click="navigateToContrasena">¿Olvidaste tu contraseña?</button></div>
     </div>
 </template>
 
@@ -27,6 +28,9 @@ export default {
     methods: {
     navigateToHome() {
       this.$router.push('/HomeView');
+    },
+    navigateToContrasena() {
+      this.$router.push('/OlvidasteContrasena');
     }
   }
 

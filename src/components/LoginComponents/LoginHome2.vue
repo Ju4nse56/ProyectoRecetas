@@ -2,7 +2,7 @@
 
     <div class="login-box2">
         <h2>Bienvenido</h2>
-        <br>
+        
 
         <div class="input-group">
             <input type="email" placeholder="E-mail">
@@ -19,9 +19,9 @@
 
 
         <button class="login-btn">Sing up</button>
-        <br>
+        
 
-        <div class="forgot-password">¿Olvidaste tu contraseña?</div>
+        
     </div>
 
 </template>

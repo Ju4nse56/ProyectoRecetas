@@ -6,9 +6,9 @@
     <div class="login-box">
       <div class="form-box">
         <div class="button-box">
-          <div id="btn" :style="{ left: activeComponent === 'login' ? '0' : '140px' }"></div>
+          <div id="btn" :style="{ left: activeComponent === 'login' ? '0' : '100px' }"></div>
           <button type="button" class="toggle-btn" @click="toggleComponent('login')">Log in</button>
-          <button type="button" class="toggle-btn" @click="toggleComponent('signup')">Sign up</button>
+          <button type="button" class="toggle-btn" @click="toggleComponent('signup')">SignUp</button>
         </div>
       </div>
 
@@ -82,14 +82,24 @@ export default {
 /*toggle*/
 .button-box {
   width: 250px;
+  height: 40px;
   margin: auto;
   margin-bottom: 20px;
   position: relative;
   border-radius: 30px;
   background: #fff;
+  display: flex; 
+  justify-content: space-between; 
+  overflow: hidden; 
+
+
 }
 
 .toggle-btn {
+  height: 100%; 
+  font-size: 14px;
+  line-height: 40px; 
+  flex: 1;
   padding: 10px 40px;
   cursor: pointer;
   background: transparent;
@@ -97,16 +107,21 @@ export default {
   outline: none;
   position: relative;
   text-align: center;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #btn {
-  left: 0;
-  right: 0;
   position: absolute;
-  width: 110px;
+  top: 0;
+  left: 0;
+  width: 50%;
   height: 100%;
   background: #FFD464;
   border-radius: 30px;
-  transition: .5s;
+  transition: 0.5s;
+  z-index: 0;
 }
 </style>
