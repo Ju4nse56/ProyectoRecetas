@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import InicioView from '@/views/InicioView.vue'
 import LoginPrincipal from '@/views/LoginPrincipal.vue'
 import HomeView from '@/views/HomeView.vue'
-import OlvidasteContrasena from '@/views/OlvidasteContrasena.vue'
+import CategoriasView from '@/views/CategoriasView.vue'
 
 const routes = [
   {
@@ -23,9 +23,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/OlvidasteContrasena',
-    name: 'Contrasena',
-    component: OlvidasteContrasena
+    path: '/Categoria/:tipo',
+    name: 'Categoria',
+    component: CategoriasView
   }
 ]
 

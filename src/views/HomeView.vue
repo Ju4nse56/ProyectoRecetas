@@ -1,6 +1,9 @@
 <template>
     <div class="main-container">
-        <SidebarMenu />
+        <div class="barra">
+            <SidebarMenu />
+        </div>
+        
         <div class="content">
             <SearchBar />
             <div class="main-content">
@@ -39,12 +42,16 @@ export default {
     width: 100vw;
     height: 100vh;
     color: #000;
+    flex-direction: row;
 }
-
+.barra{
+    width: 5%;
+}
 .content {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    width: 95%;
 }
 
 .main-content {

@@ -4,12 +4,18 @@
             <h2>Categorías</h2>
         </div>
         <div class="categories-grid">
-            <div class="category-card" v-for="(category, index) in categories" :key="index">
+            <div 
+                class="category-card" 
+                v-for="(category, index) in categories" 
+                :key="index" 
+                @click="handleClick(category.name)"
+            >
                 <img :src="category.icon" alt="icono" class="category-icon"/>
                 <p>{{ category.name }}</p>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -27,6 +33,37 @@ export default {
             ],
         };
     },
+    methods: {
+        irACategoria(tipo) {
+            this.$router.push({ name: 'Categoria', params: { tipo } });
+        },
+
+        handleClick(categoryName) {
+            switch (categoryName) {
+                case "Desayuno":
+                    this.irACategoria('desayuno');
+                    break;
+                case "Almuerzo":
+                    this.irACategoria('almuerzo');
+                    break;
+                case "Cena":
+                    this.irACategoria('cena');
+                    break;
+                case "Postre":
+                    this.irACategoria('postre');
+                    break;
+                case "Vegana":
+                    this.irACategoria('vegana');
+                    break;
+                case "Sin-gluten":
+                    this.irACategoria('Singluten');
+                    break;
+                default:
+                    alert("Categoría desconocida.");
+            }
+        }
+    }
+
 };
 </script>
 

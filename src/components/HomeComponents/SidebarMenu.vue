@@ -23,7 +23,7 @@ export default {
 
 <style>
 .sidebar {
-    width: 70px;
+    width: 100%;
     height: 100%;
     background-color: #f7fbff;
     display: flex;
