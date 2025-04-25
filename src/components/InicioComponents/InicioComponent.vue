@@ -112,4 +112,46 @@ export default {
   width: 400px;
   height: 400px;
 }
+
+@media (max-width: 768px) {
+  .welcome-container {
+    background-color: #fff;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    padding: 20px 10px;
+    border-radius: 0;
+    box-shadow: none; 
+  }
+
+  .image-side {
+    margin-top: 70px;
+    order: -1;
+
+  }
+
+  .imagen {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .content-side {
+    align-items: center;
+    text-align: center;
+    margin: 30% auto;
+  }
+
+
+  .description {
+    max-width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .start-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
 </style>

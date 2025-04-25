@@ -91,6 +91,7 @@ export default {
     padding: 15px;
     text-align: center;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .category-card:hover {

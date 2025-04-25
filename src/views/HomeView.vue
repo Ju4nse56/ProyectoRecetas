@@ -1,9 +1,7 @@
 <template>
     <div class="main-container">
-        <div class="barra">
-            <SidebarMenu />
-        </div>
-        
+        <SidebarMenu />
+
         <div class="content">
             <SearchBar />
             <div class="main-content">
@@ -12,8 +10,8 @@
                         <button class="view-button">Ver</button>
                     </div>
                 </div>
-                <CategoriesComponent/>
-                <RecommendationsComponent/>
+                <CategoriesComponent />
+                <RecommendationsComponent />
             </div>
         </div>
     </div>
@@ -44,9 +42,11 @@ export default {
     color: #000;
     flex-direction: row;
 }
-.barra{
+
+.barra {
     width: 5%;
 }
+
 .content {
     flex: 1;
     padding: 20px;

@@ -23,4 +23,10 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+@media (max-width: 480px) {
+  #app{
+    width: 100%;
+  }
+}
 </style>

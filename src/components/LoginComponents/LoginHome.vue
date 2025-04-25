@@ -14,10 +14,6 @@
         <br>
 
         <button class="login-btn" @click="navigateToHome">Log in</button>
-        
-
-
-        <div class="forgot-password"><button type="button" class="btn btn-primary">¿Olvidaste tu contraseña?</button></div>
     </div>
 </template>
 

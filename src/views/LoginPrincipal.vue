@@ -6,9 +6,9 @@
     <div class="login-box">
       <div class="form-box">
         <div class="button-box">
-          <div id="btn" :style="{ left: activeComponent === 'login' ? '0' : '100px' }"></div>
+          <div id="btn" :style="{ left: activeComponent === 'login' ? '0' : '50%' }"></div>
           <button type="button" class="toggle-btn" @click="toggleComponent('login')">Log in</button>
-          <button type="button" class="toggle-btn" @click="toggleComponent('signup')">SignUp</button>
+          <button type="button" class="toggle-btn" @click="toggleComponent('signup')">Sign up</button>
         </div>
       </div>
 
@@ -41,6 +41,21 @@ export default {
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+}
+
 .ContenedorLogin {
   display: flex;
   background: white;
@@ -49,7 +64,8 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 800px;
   height: 500px;
-
+  margin: auto;
+  overflow: hidden;
 }
 
 .image-placeholder {
@@ -61,11 +77,13 @@ export default {
   justify-content: center;
   border-radius: 5px;
   margin-right: 20px;
+  overflow: hidden;
 }
 
 .imagen {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .login-box {
@@ -75,24 +93,21 @@ export default {
   padding: 20px;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 
 /*toggle*/
 .button-box {
-  width: 250px;
+  width: 220px;
   height: 40px;
-  margin: auto;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   position: relative;
   border-radius: 30px;
   background: #fff;
   display: flex; 
   justify-content: space-between; 
   overflow: hidden; 
-
-
 }
 
 .toggle-btn {
@@ -100,7 +115,7 @@ export default {
   font-size: 14px;
   line-height: 40px; 
   flex: 1;
-  padding: 10px 40px;
+  padding: 0;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -111,6 +126,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #333;
+  transition: color 0.3s;
 }
 
 #btn {
@@ -123,5 +140,57 @@ export default {
   border-radius: 30px;
   transition: 0.5s;
   z-index: 0;
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 480px) {
+  .ContenedorLogin {
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 30vh;
+    margin-right: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .login-box {
+    width: 100%;
+    height: 70vh;
+    border-radius: 25px 25px 0 0;
+    padding: 20px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 10;
+    background: #f0f0f0;
+  }
+
+  .button-box {
+    width: 200px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-placeholder {
+    height: 25vh;
+  }
+  
+  .login-box {
+    height: 75vh;
+    padding: 20px 15px;
+  }
+  
+  .button-box {
+    width: 180px;
+  }
 }
 </style>
