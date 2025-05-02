@@ -1,15 +1,15 @@
 <template>
     <div class="sidebar">
-        <div class="sidebar-icon" :class="{ active: activeIcon === 'home' }" @click="navigateAndActivate('home', '/HomeView')">
+        <div class="sidebar-icon" @click="navigateToHome()">
             <img class="icon" :src="require('@/assets/imgMenu/home.png')" alt="Home" />
         </div>
-        <div class="sidebar-icon" :class="{ active: activeIcon === 'search' }" @click="navigateAndActivate('search')">
+        <div class="sidebar-icon" >
             <img class="icon" :src="require('@/assets/imgMenu/Search.png')" alt="Search" />
         </div>
-        <div class="sidebar-icon">
-            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite" />
+        <div class="sidebar-icon" @click="navigateToFavoritos()">
+            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite"   />
         </div>
-        <div class="sidebar-icon">
+        <div class="sidebar-icon" @click="navigateToActualizaciones()">
             <img class="icon" :src="require('@/assets/imgMenu/update.png')" alt="Update" />
         </div>
     </div>
@@ -18,16 +18,17 @@
 <script>
 export default {
     name: 'SidebarMenu',
-    data() {
-        return {
-            activeIcon: 'home'
-        }
-    },
     methods: {
         navigateToHome() {
             this.$router.push('/HomeView');
-        }
-    }
+        },
+    
+        navigateToFavoritos(){
+            this.$router.push('/Favoritos');
+        },
+        navigateToActualizaciones(){
+            this.$router.push('/Actualizaciones');
+    }},
 }
 </script>
 
