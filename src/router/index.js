@@ -3,6 +3,8 @@ import InicioView from '@/views/InicioView.vue'
 import LoginPrincipal from '@/views/LoginPrincipal.vue'
 import HomeView from '@/views/HomeView.vue'
 import CategoriasView from '@/views/CategoriasView.vue'
+import FavoritosView from '@/views/FavoritosView.vue'
+import ActualizacionesView from '@/views/ActualizacionesView.vue'
 
 const routes = [
   {
@@ -26,6 +28,16 @@ const routes = [
     path: '/Categoria/:tipo',
     name: 'Categoria',
     component: CategoriasView
+  },
+  {
+    path: '/Favoritos',
+    name: 'Favoritos',
+    component: FavoritosView
+  },
+  {
+    path: '/Actualizaciones',
+    name: 'Actualizaciones',
+    component: ActualizacionesView
   }
 ]
 

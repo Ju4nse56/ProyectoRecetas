@@ -7,10 +7,10 @@
             <img class="icon" :src="require('@/assets/imgMenu/Search.png')" alt="Search" />
         </div>
         <div class="sidebar-icon">
-            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite" />
+            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite" @click="navigateToFavoritos()" />
         </div>
         <div class="sidebar-icon">
-            <img class="icon" :src="require('@/assets/imgMenu/update.png')" alt="Update" />
+            <img class="icon" :src="require('@/assets/imgMenu/update.png')" alt="Update" @click="navigateToActualizaciones()" />
         </div>
     </div>
 </template>
@@ -21,6 +21,12 @@ export default {
     methods: {
         navigateToHome() {
             this.$router.push('/HomeView');
+        },
+        navigateToFavoritos(){
+            this.$router.push('/Favoritos');
+        },
+        navigateToActualizaciones(){
+            this.$router.push('/Actualizaciones');
         }
     }
 }
