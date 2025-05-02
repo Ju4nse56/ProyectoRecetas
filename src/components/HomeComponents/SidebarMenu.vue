@@ -1,16 +1,16 @@
 <template>
     <div class="sidebar">
-        <div class="sidebar-icon">
-            <img class="icon" :src="require('@/assets/imgMenu/home.png')" alt="Home" @click="navigateToHome()" />
+        <div class="sidebar-icon" :class="{ active: activeIcon === 'home' }" @click="navigateAndActivate('home', '/HomeView')">
+            <img class="icon" :src="require('@/assets/imgMenu/home.png')" alt="Home" />
         </div>
-        <div class="sidebar-icon">
+        <div class="sidebar-icon" :class="{ active: activeIcon === 'search' }" @click="navigateAndActivate('search')">
             <img class="icon" :src="require('@/assets/imgMenu/Search.png')" alt="Search" />
         </div>
         <div class="sidebar-icon">
-            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite" @click="navigateToFavoritos()" />
+            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite" />
         </div>
         <div class="sidebar-icon">
-            <img class="icon" :src="require('@/assets/imgMenu/update.png')" alt="Update" @click="navigateToActualizaciones()" />
+            <img class="icon" :src="require('@/assets/imgMenu/update.png')" alt="Update" />
         </div>
     </div>
 </template>
@@ -18,15 +18,14 @@
 <script>
 export default {
     name: 'SidebarMenu',
+    data() {
+        return {
+            activeIcon: 'home'
+        }
+    },
     methods: {
         navigateToHome() {
             this.$router.push('/HomeView');
-        },
-        navigateToFavoritos(){
-            this.$router.push('/Favoritos');
-        },
-        navigateToActualizaciones(){
-            this.$router.push('/Actualizaciones');
         }
     }
 }
@@ -52,6 +51,15 @@ export default {
     cursor: pointer;
     width: 40px;
     height: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%;
+    position: relative;
+}
+
+.sidebar-icon:hover, .sidebar-icon.active {
+    transform: translateX(8px);
+    background-color: #fbfcdb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
@@ -59,7 +67,7 @@ export default {
     height: 25px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
     .sidebar {
         position: fixed;
         bottom: 0;
@@ -81,6 +89,10 @@ export default {
         margin-right: 0;
         width: 60px;
         height: 100%;
+    }
+    
+    .sidebar-icon:hover, .sidebar-icon.active {
+        transform: translateY(-8px);
     }
 }
 </style>

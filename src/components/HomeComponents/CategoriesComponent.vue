@@ -76,6 +76,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #2c3e50;
 }
 
 .categories-grid {
@@ -86,7 +87,7 @@ export default {
 }
 
 .category-card {
-    background-color: #fdf1ba;
+    background-color: #fff;
     border-radius: 15px;
     padding: 15px;
     text-align: center;
@@ -95,7 +96,7 @@ export default {
 }
 
 .category-card:hover {
-    background-color: #e0e0e0;
+    background-color: #fbfcdb;
 }
 
 .category-icon {
