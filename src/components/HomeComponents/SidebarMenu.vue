@@ -1,15 +1,15 @@
 <template>
     <div class="sidebar">
-        <div class="sidebar-icon" @click="navigateToHome()">
+        <div class="sidebar-icon" :class="{ active: activeIcon === 'home' }" @click="navigateToHome()">
             <img class="icon" :src="require('@/assets/imgMenu/home.png')" alt="Home" />
         </div>
         <div class="sidebar-icon" >
             <img class="icon" :src="require('@/assets/imgMenu/Search.png')" alt="Search" />
         </div>
-        <div class="sidebar-icon" @click="navigateToFavoritos()">
-            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite"   />
+        <div class="sidebar-icon" :class="{ active: activeIcon === 'favorite' }" @click="navigateToFavoritos()">
+            <img class="icon" :src="require('@/assets/imgMenu/favorite.png')" alt="Favorite" />
         </div>
-        <div class="sidebar-icon" @click="navigateToActualizaciones()">
+        <div class="sidebar-icon" :class="{ active: activeIcon === 'update' }" @click="navigateToActualizaciones()">
             <img class="icon" :src="require('@/assets/imgMenu/update.png')" alt="Update" />
         </div>
     </div>
@@ -18,17 +18,36 @@
 <script>
 export default {
     name: 'SidebarMenu',
+    data() {
+        return {
+            activeIcon: 'home',
+        }
+    },
+    created() {
+        const currentPath = this.$route.path;
+        if (currentPath.includes('/Favoritos')) {
+            this.activeIcon = 'favorite';
+        } else if (currentPath.includes('/Actualizaciones')) {
+            this.activeIcon = 'update';
+        } else if (currentPath.includes('/HomeView')) {
+            this.activeIcon = 'home';
+        }
+    },
     methods: {
         navigateToHome() {
+            this.activeIcon = 'home';
             this.$router.push('/HomeView');
         },
     
         navigateToFavoritos(){
+            this.activeIcon = 'favorite';
             this.$router.push('/Favoritos');
         },
         navigateToActualizaciones(){
+            this.activeIcon = 'update';
             this.$router.push('/Actualizaciones');
-    }},
+        }
+    },
 }
 </script>
 
@@ -57,7 +76,11 @@ export default {
     position: relative;
 }
 
-.sidebar-icon:hover, .sidebar-icon.active {
+.sidebar-icon:hover {
+    transform: translateX(4px);
+}
+
+.sidebar-icon.active {
     transform: translateX(8px);
     background-color: #fbfcdb;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,8 +115,14 @@ export default {
         height: 100%;
     }
     
-    .sidebar-icon:hover, .sidebar-icon.active {
+    .sidebar-icon:hover {
+        transform: translateY(-4px);
+    }
+    
+    .sidebar-icon.active {
         transform: translateY(-8px);
+        background-color: #fbfcdb;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 }
 </style>
