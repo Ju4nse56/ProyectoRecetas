@@ -13,7 +13,11 @@
 
         <div class="abajo">
             <div class="subcontenedor">
-                <CardComponent/>
+                <CardComponent
+                    v-for="(item, index) in recetas"
+                    :key="index"
+                    :recipe="item"
+                />
             </div>
         </div>
     </div>
@@ -25,12 +29,34 @@
 import ImagenAtras from '@/components/CategoriaComponents/ImagenAtras.vue';
 import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
 import CardComponent from '@/components/CardComponent/CardComponent.vue';
+
 export default {
     name: 'FavoritosView',
     components: {
         ImagenAtras,
         SidebarMenu,
         CardComponent
+    },
+    data() {
+        return {
+        recetas: [
+            {
+            title: 'Quiche',
+            time: '20 minutos',
+            image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+            },
+            {
+            title: 'Tarta de manzana',
+            time: '35 minutos',
+            image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+            },
+            {
+            title: '', // Esta tarjeta no se mostrará por el v-if
+            time: '10 minutos',
+            image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+            }
+        ]
+        };
     }
 }
 </script>
@@ -92,5 +118,9 @@ export default {
     margin: 0 auto;
     padding: 10px;
     position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    justify-items: center;
 }
 </style>
