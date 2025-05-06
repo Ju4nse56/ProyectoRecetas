@@ -9,7 +9,7 @@
         </div>
         <br>
         <div class="input-group">
-            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Contraseña">
         </div>
         <br>
 
@@ -57,7 +57,6 @@ body {
 }
 
 .login-btn {
-    width: 100%;
     padding: 10px;
     background: black;
     color: white;
@@ -65,6 +64,7 @@ body {
     border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
+    width: 100%;
 }
 
 .forgot-password {

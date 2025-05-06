@@ -3,7 +3,7 @@
         <div class="sidebar-icon" :class="{ active: activeIcon === 'home' }" @click="navigateToHome()">
             <img class="icon" :src="require('@/assets/imgMenu/home.png')" alt="Home" />
         </div>
-        <div class="sidebar-icon" >
+        <div class="sidebar-icon" :class="{ active: activeIcon === 'search' }" @click="navigateToSearch()">
             <img class="icon" :src="require('@/assets/imgMenu/Search.png')" alt="Search" />
         </div>
         <div class="sidebar-icon" :class="{ active: activeIcon === 'favorite' }" @click="navigateToFavoritos()">
@@ -31,6 +31,8 @@ export default {
             this.activeIcon = 'update';
         } else if (currentPath.includes('/HomeView')) {
             this.activeIcon = 'home';
+        }else if (currentPath.includes('/SearchView')) {
+            this.activeIcon = 'search';
         }
     },
     methods: {
@@ -46,6 +48,10 @@ export default {
         navigateToActualizaciones(){
             this.activeIcon = 'update';
             this.$router.push('/Actualizaciones');
+        },
+        navigateToSearch(){
+            this.activeIcon = 'search';
+            this.$router.push('/Search')
         }
     },
 }

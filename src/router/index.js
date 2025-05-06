@@ -5,6 +5,7 @@ import HomeView from '@/views/HomeView.vue'
 import CategoriasView from '@/views/CategoriasView.vue'
 import FavoritosView from '@/views/FavoritosView.vue'
 import ActualizacionesView from '@/views/ActualizacionesView.vue'
+import SearchView from '@/views/SearchView.vue'
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     path: '/Actualizaciones',
     name: 'Actualizaciones',
     component: ActualizacionesView
+  },
+  {
+    path: '/Search',
+    name: 'Search',
+    component: SearchView
   }
 ]
 

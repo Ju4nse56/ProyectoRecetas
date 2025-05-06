@@ -4,9 +4,7 @@
       <h1 class="title">Es tiempo de cocinar</h1>
       <p class="description">
         Cocinar no es difícil, solo es cuestión de atreverse. Con un poco de práctica, paciencia y pasión, cualquiera
-        puede crear platos deliciosos. ¡Incluso los chefs más expertos empezaron desde cero! Aquí encontrarás todo lo
-        que necesitas para dar tus primeros pasos (o perfeccionar tus habilidades). ¿Listo para sorprenderte a ti
-        mismo?"
+        puede crear platos deliciosos.
       </p>
       <button class="start-button" @click="navigateToLogin">
         » Empezar
@@ -39,6 +37,21 @@ export default {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(to bottom right, #fff5e1, #eedcc1);
+}
+
+.welcome-container::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('@/assets/imgInicio/fondo-utensilios.png');
+  background-repeat: repeat;
+  background-size: 100px;
+  opacity: 0.05;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .content-side {
@@ -47,8 +60,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-
-
 }
 
 .title {
@@ -58,23 +69,25 @@ export default {
 }
 
 .description {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 30px;
   color: #333;
   max-width: 400px;
   text-align: justify;
+  letter-spacing: -0.2px; 
 }
 
 .start-button {
   background-color: #000;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   margin: 5px auto;
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
-  width: fit-content;
+  width: 50%;
+  height: 9%;
 }
 
 .image-side {
@@ -121,7 +134,7 @@ export default {
     width: 100%;
     padding: 20px 10px;
     border-radius: 0;
-    box-shadow: none; 
+    box-shadow: none;
   }
 
   .image-side {
@@ -145,8 +158,9 @@ export default {
 
   .description {
     max-width: 100%;
-    font-size: 14px;
+    font-size: 20px;
     margin-top: 10px;
+    letter-spacing: -0.5px; 
   }
 
   .start-button {

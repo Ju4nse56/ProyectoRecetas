@@ -91,17 +91,16 @@
   }
   
   .Titulo {
-    flex: none;
+    flex: 1;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: center;
     margin-left: 10px;
   }
   
   .titulo1 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin: 0;
     font-weight: bold;
     color: #333;

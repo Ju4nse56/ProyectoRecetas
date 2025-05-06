@@ -13,13 +13,7 @@
 
         <div class="abajo">
             <div class="subcontenedor">
-                <div class="recetas-grid">
-                    <div class="tarjeta-receta" v-for="(receta, index) in recetas" :key="index">
-                        <p class="texto-receta">{{ receta.texto }}</p>
-                        <img :src="receta.imagen" alt="Imagen de receta" class="imagen-receta"/>
-                    </div>
-
-                </div>
+                <CardComponent/>
             </div>
         </div>
     </div>
@@ -30,28 +24,14 @@
 <script>
 import ImagenAtras from '@/components/CategoriaComponents/ImagenAtras.vue';
 import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
+import CardComponent from '@/components/CardComponent/CardComponent.vue';
 export default {
     name: 'FavoritosView',
     components: {
         ImagenAtras,
-        SidebarMenu
-    },
-    data() {
-        return {
-            recetas: [
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 1' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 2' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 3' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 4' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 5' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 6' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 7' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 8' },
-                { imagen: require("@/assets/imgCategories/desayuno.png"), texto: 'Receta 9' }
-            ]
-        };
+        SidebarMenu,
+        CardComponent
     }
-
 }
 </script>
 
@@ -83,17 +63,16 @@ export default {
 }
 
 .Titulo {
-    flex: none;
-    height: 100%;
+    flex: 1;
+    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: center;
     margin-left: 10px;
 }
 
 .titulo1 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin: 0;
     font-weight: bold;
     color: #333;
@@ -113,42 +92,5 @@ export default {
     margin: 0 auto;
     padding: 10px;
     position: relative;
-}
-
-.recetas-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    width: 100%;
-}
-.main-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    color: #000;
-    flex-direction: row;
-    overflow: hidden;
-}
-.tarjeta-receta {
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 80%;
-    height: auto;
-}
-
-.imagen-receta {
-    width: 60%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.texto-receta {
-    width: 40%;
-    margin-top: 5px;
-    font-size: 1rem;
 }
 </style>

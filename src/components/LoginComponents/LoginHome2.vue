@@ -9,11 +9,11 @@
         </div>
         <br>
         <div class="input-group">
-            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Contraseña">
         </div>
         <br>
         <div class="input-group">
-            <input type="password" placeholder="Confirm-Password">
+            <input type="password" placeholder="Confirmar contraseña">
         </div>
         <br>
 
