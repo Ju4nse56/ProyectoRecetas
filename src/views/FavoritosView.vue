@@ -2,27 +2,23 @@
     <div class="main-container">
         <SidebarMenu />
         <div class="contenedor2">
-        <div class="arriba">
-            <div class="atras">
-                <ImagenAtras />
+            <div class="arriba">
+                <div class="atras">
+                    <ImagenAtras />
+                </div>
+                <div class="Titulo">
+                    <h1 class="titulo1">Favoritos</h1>
+                </div>
             </div>
-            <div class="Titulo">
-                <h1 class="titulo1">Favoritos</h1>
-            </div>
-        </div>
 
-        <div class="abajo">
-            <div class="subcontenedor">
-                <CardComponent
-                    v-for="(item, index) in recetas"
-                    :key="index"
-                    :recipe="item"
-                />
+            <div class="abajo">
+                <div class="subcontenedor">
+                    <CardComponent v-for="(item, index) in recetas" :key="index" :recipe="item" />
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    
+
 </template>
 
 <script>
@@ -39,29 +35,38 @@ export default {
     },
     data() {
         return {
-        recetas: [
-            {
-            title: 'Quiche',
-            time: '20 minutos',
-            image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-            },
-            {
-            title: 'Tarta de manzana',
-            time: '35 minutos',
-            image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-            },
-            {
-            title: '', // Esta tarjeta no se mostrará por el v-if
-            time: '10 minutos',
-            image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-            }
-        ]
+            recetas: [
+                {
+                    title: 'Quiche',
+                    time: '20 minutos',
+                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+                },
+                {
+                    title: 'Quiche',
+                    time: '20 minutos',
+                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+                },
+                {
+                    title: 'Quiche',
+                    time: '20 minutos',
+                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+                },
+                {
+                    title: 'Quiche',
+                    time: '20 minutos',
+                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+                }
+
+            ]
         };
     }
 }
 </script>
 
 <style scoped>
+.main-container{
+    background-color: white;
+}
 .contenedor2 {
     width: 95%;
     height: 100%;
@@ -113,14 +118,19 @@ export default {
 
 .subcontenedor {
     width: 100%;
-    height: 100%;
-    background-color: white;
+    max-width: 900px;
     margin: 0 auto;
     padding: 10px;
-    position: relative;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0;
     justify-items: center;
 }
+
+@media (max-width: 500px) {
+    .subcontenedor {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
