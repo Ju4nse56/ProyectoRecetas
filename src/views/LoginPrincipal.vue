@@ -50,10 +50,12 @@ export default {
 
 body, html {
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f4f4f4;
+  overflow: hidden;
 }
 
 .ContenedorLogin {
@@ -143,11 +145,11 @@ body, html {
 }
 
 /* Media Queries para dispositivos móviles */
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .ContenedorLogin {
     flex-direction: column;
-    width: 100%;
-    height: 100vh;
+    width: 100vw; 
+    height: 100vh; 
     border-radius: 0;
     padding: 0;
     box-shadow: none;
@@ -156,7 +158,7 @@ body, html {
 
   .image-placeholder {
     width: 100%;
-    height: 30vh;
+    height: 35vh; 
     margin-right: 0;
     margin-bottom: 0;
     border-radius: 0;
@@ -164,7 +166,7 @@ body, html {
 
   .login-box {
     width: 100%;
-    height: 70vh;
+    height: 65vh; 
     border-radius: 25px 25px 0 0;
     padding: 20px;
     margin-top: -20px;
@@ -176,21 +178,6 @@ body, html {
   .button-box {
     width: 200px;
     margin-bottom: 25px;
-  }
-}
-
-@media (max-width: 480px) {
-  .image-placeholder {
-    height: 25vh;
-  }
-  
-  .login-box {
-    height: 75vh;
-    padding: 20px 15px;
-  }
-  
-  .button-box {
-    width: 180px;
   }
 }
 </style>

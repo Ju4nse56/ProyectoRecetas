@@ -57,6 +57,7 @@ body {
 }
 
 .login-btn {
+    width: 70%;
     padding: 10px;
     background: black;
     color: white;
@@ -64,7 +65,6 @@ body {
     border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
-    width: 100%;
 }
 
 .forgot-password {

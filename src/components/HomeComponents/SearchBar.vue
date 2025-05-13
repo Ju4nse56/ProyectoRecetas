@@ -4,9 +4,6 @@
             <h1 class="title">Try it</h1>
             <div class="search-container">
                 <input type="text" placeholder="Buscar" class="search-input">
-                <div class="filter">
-                    <img class="icon" :src="require('@/assets/imgSearch/filtrar.png')" alt="Filtrar" />
-                </div>
             </div>
         </div>
     </div>

@@ -59,7 +59,7 @@ body {
 }
 
 .login-btn {
-    width: 100%;
+    width: 70%;
     padding: 10px;
     background: black;
     color: white;
