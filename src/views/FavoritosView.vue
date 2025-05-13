@@ -1,67 +1,78 @@
 <template>
-    <div class="main-container">
-        <SidebarMenu />
-        <div class="contenedor2">
-            <div class="arriba">
-                <div class="atras">
-                    <ImagenAtras />
-                </div>
-                <div class="Titulo">
-                    <h1 class="titulo1">Favoritos</h1>
-                </div>
-            </div>
-
-            <div class="abajo">
-                <div class="subcontenedor">
-                    <CardComponent v-for="(item, index) in recetas" :key="index" :recipe="item" />
-                </div>
-            </div>
+  <div class="main-container">
+    <SidebarMenu />
+    <div class="contenedor2">
+      <div class="arriba">
+        <div class="atras">
+          <ImagenAtras />
         </div>
-    </div>
+        <div class="Titulo">
+          <h1 class="titulo1">Favoritos</h1>
+        </div>
+      </div>
 
+      <!-- Mostrar receta seleccionada -->
+      <RecetasComplete
+        v-if="recetaSeleccionada"
+        :data="recetaSeleccionada"
+        @volver="recetaSeleccionada = null"
+      />
+
+      <!-- Mostrar lista de recetas -->
+      <div class="abajo" v-else>
+        <div class="subcontenedor">
+          <CardComponent
+            v-for="(item, index) in recetas"
+            :key="index"
+            :recipe="item"
+            @click="mostrarReceta(item)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import ImagenAtras from '@/components/CategoriaComponents/ImagenAtras.vue';
 import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
 import CardComponent from '@/components/CardComponent/CardComponent.vue';
+import RecetasComplete from '@/components/RecetasComponents/RecetasComplete.vue';
 
 export default {
-    name: 'FavoritosView',
-    components: {
-        ImagenAtras,
-        SidebarMenu,
-        CardComponent
-    },
-    data() {
-        return {
-            recetas: [
-                {
-                    title: 'Quiche',
-                    time: '20 minutos',
-                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-                },
-                {
-                    title: 'Quiche',
-                    time: '20 minutos',
-                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-                },
-                {
-                    title: 'Quiche',
-                    time: '20 minutos',
-                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-                },
-                {
-                    title: 'Quiche',
-                    time: '20 minutos',
-                    image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
-                }
-
-            ]
-        };
+  name: 'FavoritosView',
+  components: {
+    ImagenAtras,
+    SidebarMenu,
+    CardComponent,
+    RecetasComplete 
+  },
+  data() {
+    return {
+      recetaSeleccionada: null,
+      recetas: [
+        {
+          nombre: 'Quiche de verduras',
+          descripcion: 'Una deliciosa quiche casera.',
+          videoUrl: 'https://www.youtube.com/watch?v=AeKd-SVxh74',
+          rating: 4.5,
+          porciones: ['2 porciones', '4 porciones'],
+          ingredientes: ['Huevos', 'Espinaca', 'Queso', 'Masa quebrada'],
+          preparacion: 'Batir los huevos, mezclar con ingredientes y hornear.',
+          image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+        },
+        // Más recetas si deseas
+      ]
+    };
+  },
+  methods: {
+    mostrarReceta(item) {
+      this.recetaSeleccionada = item;
     }
-}
+  }
+};
 </script>
+
 
 <style scoped>
 .main-container{
