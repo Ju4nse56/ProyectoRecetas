@@ -17,17 +17,9 @@ export default {
 
 <style scoped>
 .boton-atras-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
     width: 40px;
     height: 40px;
-}
-
-.boton-atras-container {
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
+    background-color: #f7f6f6;
     border-radius: 5px;
     display: flex;
     align-items: center;

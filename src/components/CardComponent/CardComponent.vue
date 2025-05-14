@@ -36,6 +36,7 @@ export default {
     font-family: Arial, sans-serif;
     position: relative;
     padding: 15px;
+    cursor: pointer;
 }
 
 .card-content {
@@ -97,5 +98,9 @@ export default {
     border: 1px solid #ddd;
     width: 40px;
     height: 40px;
+}
+
+.favorite-button:hover{
+    background-color: #fbfcdb;
 }
 </style>

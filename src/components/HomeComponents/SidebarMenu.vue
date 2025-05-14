@@ -31,7 +31,7 @@ export default {
             this.activeIcon = 'update';
         } else if (currentPath.includes('/HomeView')) {
             this.activeIcon = 'home';
-        }else if (currentPath.includes('/SearchView')) {
+        }else if (currentPath.includes('/Search')) {
             this.activeIcon = 'search';
         }
     },

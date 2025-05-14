@@ -1,23 +1,52 @@
 <template>
-    <div class="search-layout">
-        <div class="atras">
-            <ImagenAtras />
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Buscar" class="search-input">
-            <div class="filter">
-                <img class="icon" :src="require('@/assets/imgSearch/filtrar.png')" alt="Filtrar" />
+    <div class="main-container">
+        <SidebarMenu />
+        <div class="search-layout">
+            <div class="atras">
+                <ImagenAtras />
+            </div>
+            <div class="search-container">
+                <input type="text" placeholder="Buscar" class="search-input">
+                <div class="filter" @click="showFilterModal = true">
+                    <img class="icon" :src="require('@/assets/imgSearch/filtrar.png')" alt="Filtrar" />
+                </div>
             </div>
         </div>
+
+        <!-- Modal de filtros -->
+        <div class="filter-modal" :class="{ 'show-modal': showFilterModal }">
+            <div class="filter-content">
+                <div class="filter-header">
+                    <p>Filtra las recetas</p>
+                </div>
+                <ul>
+                    <li>Todas</li>
+                    <li>Tipos de comida</li>
+                    <li>Tiempo de preparación</li>
+                </ul>
+                <button @click="showFilterModal = false">Cerrar</button>
+            </div>
+        </div>
+
+        <!-- Overlay para cuando el modal está activo -->
+        <div class="modal-overlay" v-if="showFilterModal" @click="showFilterModal = false"></div>
     </div>
 </template>
 
 <script>
 import ImagenAtras from '../CategoriaComponents/ImagenAtras.vue';
+import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
+
 export default {
     name: 'SearchFilter',
+    data() {
+        return {
+            showFilterModal: false
+        };
+    },
     components: {
         ImagenAtras,
+        SidebarMenu
     }
 }
 </script>
@@ -49,7 +78,6 @@ export default {
     flex: 1;
     align-items: center;
 }
-
 
 .search-input {
     font-size: medium;
@@ -98,5 +126,92 @@ export default {
     width: 24px;
     height: 24px;
     cursor: pointer;
+}
+
+/* Modal Styles */
+.filter-modal {
+    position: fixed;
+    bottom: -100%;
+    /* Inicialmente fuera de la pantalla por abajo */
+    left: 0;
+    right: 0;
+    background-color: #1e1e1e;
+    color: white;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: bottom 0.3s ease-in-out;
+}
+
+.show-modal {
+    bottom: 0;
+    /* Al agregar esta clase, el modal aparece desde abajo */
+}
+
+.filter-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.filter-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.filter-content ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.filter-content li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.filter-content li:last-child {
+    border-bottom: none;
+}
+
+.filter-content .check {
+    margin-right: 10px;
+    color: #FFD464;
+    font-weight: bold;
+}
+
+.filter-content button {
+    align-self: center;
+    padding: 12px 30px;
+    background: #666;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.filter-content button:hover {
+    background: #888;
+}
+
+/* Overlay para oscurecer el fondo cuando el modal está activo */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <button class="back-button" @click="$emit('volver')">←</button>
 
     <div class="scrollable-content">
       
@@ -194,5 +193,9 @@ export default {
 
 .ingredients, .preparation {
   margin-bottom: 20px;
+}
+
+.ingredients ul{
+  list-style-type: none;
 }
 </style>
