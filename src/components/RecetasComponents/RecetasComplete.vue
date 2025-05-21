@@ -2,6 +2,7 @@
   <div class="container">
 
     <div class="scrollable-content">
+      <button class="back-button" @click="$emit('volver')">←</button>
       
       <div class="video-wrapper">
         <iframe
@@ -13,17 +14,7 @@
         </iframe>
       </div>
 
-      <section class="rating-section">
-        <h3>Califica esta receta</h3>
-        <div class="stars">
-          <span v-for="i in 5" :key="i">★</span>
-        </div>
-        <div class="comment-box">
-          <input type="text" placeholder="Agregar un comentario" v-model="comment" />
-          <button @click="submitComment">Enviar</button>
-        </div>
-        <h4>Reseñas</h4>
-      </section>
+      
 
       <section class="details">
         <h2>{{ data.nombre }}</h2>
@@ -53,6 +44,16 @@
           <p>{{ data.preparacion }}</p>
         </div>
       </section>
+      <section class="rating-section">
+        <h3>Califica esta receta</h3>
+        <div class="comment-box">
+          <input type="text" placeholder="Agregar un comentario" v-model="comment" />
+          <button @click="submitComment">Enviar</button>
+        </div>
+      </section>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
 </template>
@@ -197,5 +198,11 @@ export default {
 
 .ingredients ul{
   list-style-type: none;
+}
+@media (min-width: 500px) {
+    .video-player {
+      width: 100%;
+      height: 315px;
+    }
 }
 </style>

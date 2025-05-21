@@ -3,13 +3,14 @@
     <SidebarMenu />
     <div class="contenedor2">
       <div class="arriba">
-        <div class="atras">
-          <ImagenAtras />
-        </div>
+        
         <div class="Titulo">
           <h1 class="titulo1">Favoritos</h1>
         </div>
       </div>
+
+      
+                
 
       <!-- Mostrar receta seleccionada -->
       <RecetasComplete
@@ -34,7 +35,6 @@
 </template>
 
 <script>
-import ImagenAtras from '@/components/CategoriaComponents/ImagenAtras.vue';
 import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
 import CardComponent from '@/components/CardComponent/CardComponent.vue';
 import RecetasComplete from '@/components/RecetasComponents/RecetasComplete.vue';
@@ -42,7 +42,6 @@ import RecetasComplete from '@/components/RecetasComponents/RecetasComplete.vue'
 export default {
   name: 'FavoritosView',
   components: {
-    ImagenAtras,
     SidebarMenu,
     CardComponent,
     RecetasComplete 
@@ -54,14 +53,23 @@ export default {
         {
           nombre: 'Quiche de verduras',
           descripcion: 'Una deliciosa quiche casera.',
-          videoUrl: 'https://www.youtube.com/watch?v=AeKd-SVxh74',
+          videoUrl: 'https://youtu.be/oVYfDQ2J6fg?si=MYRMthPwlT3lCK2H',
+          rating: 4.5,
+          porciones: ['2 porciones', '4 porciones'],
+          ingredientes: ['Huevos', 'Espinaca', 'Queso', 'Masa quebrada'],
+          preparacion: 'Batir los huevos, mezclar con ingredientes y hornear.',
+          image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+        },{
+          nombre: 'Quiche de verduras',
+          descripcion: 'Una deliciosa quiche casera.',
+          videoUrl: 'https://youtu.be/oVYfDQ2J6fg?si=MYRMthPwlT3lCK2H',
           rating: 4.5,
           porciones: ['2 porciones', '4 porciones'],
           ingredientes: ['Huevos', 'Espinaca', 'Queso', 'Masa quebrada'],
           preparacion: 'Batir los huevos, mezclar con ingredientes y hornear.',
           image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
         },
-        // Más recetas si deseas
+        
       ]
     };
   },
