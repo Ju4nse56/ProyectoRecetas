@@ -5,25 +5,55 @@
         <br>
 
         <div class="input-group">
-            <input type="email" placeholder="E-mail">
+            <input v-model="user.email" type="email" placeholder="E-mail">
         </div>
         <br>
         <div class="input-group">
-            <input type="password" placeholder="Contraseña">
+            <input v-model="user.password" type="password" placeholder="Contraseña">
         </div>
         <br>
 
-        <button class="login-btn" @click="navigateToHome">Log in</button>
+        <button class="login-btn" @click="login">Log in</button>
     </div>
 </template>
 
 <script>
 export default {
     name: 'LoginHome',
+    
+    data(){
+        return{
+            user: {
+                email: "",
+                password: ""
+            }
+        }
+    },
 
     methods: {
     navigateToHome() {
       this.$router.push('/HomeView');
+    },
+
+    login: async function() {
+        try {
+          const url = "http://127.0.0.1:8000/api/login";
+          const response = await this.axios.post(url, this.user);
+          if (response.data.status === 200) {
+            this.navigateToHome()
+          } else {
+            alert(response.data.message);
+          }
+        } catch (error) {
+          if (error.response && error.response.data) {
+            alert(error.response.data.message || "Error en la solicitud") +
+              (error.response.data.errors ? ": " + JSON.stringify(error.response.data.errors) : "");
+          } else {
+            this.error = "Error en la solicitud";
+          }
+        } finally {
+          console.log("Proceso terminado");
+        }
     }
   }
 
