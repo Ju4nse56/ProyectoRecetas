@@ -71,6 +71,7 @@ export default {
     width: 100vw;
     height: 100vh;
     color: #000;
+    z-index: 1;
 }
 
 .content {
