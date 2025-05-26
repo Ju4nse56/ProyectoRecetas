@@ -1,6 +1,43 @@
 <template>
-  <router-view/>
+  <button @click="logout">Log out</button>
+
+  <router-view />
 </template>
+
+<script>
+export default {
+  methods: {
+    logout: async function () {
+      try {
+        const url = "http://127.0.0.1:8000/api/logout";
+        await this.axios.post(
+          url,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        localStorage.removeItem('token');
+        delete this.axios.defaults.headers.common['Authorization'];
+        this.$router.push('/loginPrincipal');
+      } catch (error) {
+        if (error.response && error.response.data) {
+          alert(error.response.data.message || "Error en la solicitud") +
+            (error.response.data.errors
+              ? ": " + JSON.stringify(error.response.data.errors)
+              : "");
+        } else {
+          this.error = "Error en la solicitud";
+        }
+      } finally {
+        console.log("Proceso terminado");
+      }
+    },
+  },
+};
+</script>
 
 <style>
 #app {
@@ -25,7 +62,7 @@ nav a.router-link-exact-active {
 }
 
 @media (max-width: 480px) {
-  #app{
+  #app {
     width: 100%;
   }
 }

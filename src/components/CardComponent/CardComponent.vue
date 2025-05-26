@@ -12,7 +12,7 @@
                 <img :src="require('@/assets/imgMenu/favorite.png')" alt="">
             </div>
             <div class="card-image">
-                <img class="recipe-image" :src="require('@/assets/imgRecetas/quiche.png')" alt="Receta">
+                <img class="recipe-image" :src="require('@/assets/imgRecetas/tacos.jpg')" alt="Receta">
             </div>
         </div>
     </div>
