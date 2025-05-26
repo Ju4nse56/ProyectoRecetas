@@ -3,7 +3,10 @@
     <div class="login-box2">
         <h2>Bienvenido</h2>
         
-
+        <div class="input-group">
+            <input type="user" placeholder="Usuario">
+        </div>
+        <br>
         <div class="input-group">
             <input type="email" placeholder="E-mail">
         </div>
@@ -29,6 +32,17 @@
 <script>
 export default {
     name: 'LoginHome2',
+
+    data(){
+        return{
+            user: {
+                username:"",
+                email: "",
+                password: "",
+                password_confirmation:""
+            },
+        }
+    },
 }
 </script>
 
