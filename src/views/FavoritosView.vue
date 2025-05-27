@@ -58,16 +58,18 @@ export default {
           porciones: ['2 porciones', '4 porciones'],
           ingredientes: ['Huevos', 'Espinaca', 'Queso', 'Masa quebrada'],
           preparacion: 'Batir los huevos, mezclar con ingredientes y hornear.',
-          image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+          image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png'),
+          time:'20'
         },{
-          nombre: 'Quiche de verduras',
-          descripcion: 'Una deliciosa quiche casera.',
-          videoUrl: 'https://youtu.be/oVYfDQ2J6fg?si=MYRMthPwlT3lCK2H',
+          nombre: 'Quiche de queso',
+          descripcion: 'Una deliciosa quiche ',
+          videoUrl: 'https://www.youtube.com/watch?v=7TUQyRc1u9o',
           rating: 4.5,
           porciones: ['2 porciones', '4 porciones'],
           ingredientes: ['Huevos', 'Espinaca', 'Queso', 'Masa quebrada'],
           preparacion: 'Batir los huevos, mezclar con ingredientes y hornear.',
-          image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
+          image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png'),
+          time: '28'
         },
         
       ]

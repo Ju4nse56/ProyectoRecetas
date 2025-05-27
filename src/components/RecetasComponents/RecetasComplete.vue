@@ -1,20 +1,17 @@
 <template>
   <div class="container">
-
     <div class="scrollable-content">
       <button class="back-button" @click="$emit('volver')">←</button>
-      
-      <div class="video-wrapper">
+
+      <div class="video-wrapper" v-if="videoUrl">
         <iframe
           :src="videoUrl"
           frameborder="0"
-          allow="autoplay; encrypted-media"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           class="video-player">
         </iframe>
       </div>
-
-      
 
       <section class="details">
         <h2>{{ data.nombre }}</h2>
@@ -44,6 +41,7 @@
           <p>{{ data.preparacion }}</p>
         </div>
       </section>
+
       <section class="rating-section">
         <h3>Califica esta receta</h3>
         <div class="comment-box">
@@ -51,9 +49,7 @@
           <button @click="submitComment">Enviar</button>
         </div>
       </section>
-      <br>
-      <br>
-      <br>
+      <br><br><br>
     </div>
   </div>
 </template>
@@ -81,14 +77,23 @@ export default {
       }
     },
     extractVideoId(url) {
-      const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/;
-      const match = url.match(regex);
-      return match ? match[1] : '';
+      try {
+        const urlObj = new URL(url);
+        if (urlObj.hostname.includes('youtube.com')) {
+          return urlObj.searchParams.get('v');
+        } else if (urlObj.hostname.includes('youtu.be')) {
+          return urlObj.pathname.slice(1); // elimina la barra inicial
+        }
+        return '';
+      } catch (e) {
+        return '';
+      }
     }
   },
   mounted() {
-    if (this.data.videoUrl) {
-      this.videoUrl = `https://www.youtube.com/embed/${this.extractVideoId(this.data.videoUrl)}`;
+    const videoId = this.extractVideoId(this.data.videoUrl);
+    if (videoId) {
+      this.videoUrl = `https://www.youtube.com/embed/${videoId}`;
     }
   }
 };
@@ -125,6 +130,8 @@ export default {
 .video-wrapper {
   width: 100%;
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .video-player {
@@ -192,17 +199,19 @@ export default {
   margin-bottom: 20px;
 }
 
-.ingredients, .preparation {
+.ingredients,
+.preparation {
   margin-bottom: 20px;
 }
 
-.ingredients ul{
+.ingredients ul {
   list-style-type: none;
 }
-@media (min-width: 500px) {
-    .video-player {
-      width: 100%;
-      height: 315px;
-    }
+
+@media (max-width: 500px) {
+  .video-player {
+    width: 100%;
+    height: 215px;
+  }
 }
 </style>

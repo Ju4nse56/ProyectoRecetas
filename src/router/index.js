@@ -26,9 +26,10 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/Categoria/:tipo',
+    path: '/Categoria/:nombre',
     name: 'Categoria',
-    component: CategoriasView
+    component: CategoriasView,
+    props:true,
   },
   {
     path: '/Favoritos',

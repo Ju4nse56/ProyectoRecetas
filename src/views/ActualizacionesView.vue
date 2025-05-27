@@ -37,23 +37,23 @@ export default {
         return {
             recetas: [
                 {
-                    title: 'Quiche',
-                    time: '20 minutos',
+                    nombre: 'Quiche',
+                    time: '20 ',
                     image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
                 },
                 {
-                    title: 'Quiche',
-                    time: '20 minutos',
+                    nombre: 'Quiche',
+                    time: '20 ',
                     image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
                 },
                 {
-                    title: 'Quiche',
-                    time: '20 minutos',
+                    nombre: 'Quiche',
+                    time: '20 ',
                     image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
                 },
                 {
-                    title: 'Quiche',
-                    time: '20 minutos',
+                    nombre: 'Quiche',
+                    time: '20 ',
                     image: require('@/assets/imgRecetas/goulash.jpg-editada-removebg-preview.png')
                 }
 

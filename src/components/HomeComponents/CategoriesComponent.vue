@@ -34,29 +34,29 @@ export default {
         };
     },
     methods: {
-        irACategoria(tipo) {
-            this.$router.push({ name: 'Categoria', params: { tipo } });
+        irACategoria(nombre) {
+            this.$router.push({ name: 'Categoria', params: { nombre } });
         },
 
         handleClick(categoryName) {
             switch (categoryName) {
                 case "Desayuno":
-                    this.irACategoria('desayuno');
+                    this.irACategoria('Desayuno');
                     break;
                 case "Almuerzo":
-                    this.irACategoria('almuerzo');
+                    this.irACategoria('Almuerzo');
                     break;
                 case "Cena":
-                    this.irACategoria('cena');
+                    this.irACategoria('Cena');
                     break;
                 case "Postre":
-                    this.irACategoria('postre');
+                    this.irACategoria('Postre');
                     break;
                 case "Vegana":
-                    this.irACategoria('vegana');
+                    this.irACategoria('Vegana');
                     break;
                 case "Sin-gluten":
-                    this.irACategoria('Singluten');
+                    this.irACategoria('Sin-gluten');
                     break;
                 default:
                     alert("Categoría desconocida.");
