@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
     <SidebarMenu />
+    
     <div class="derecha">
       <div class="arriba">
         <div class="atras">
@@ -12,14 +13,14 @@
         </div>
       </div>
 
-      <!-- Mostrar receta seleccionada -->
+      
       <RecetasComplete
         v-if="recetaSeleccionada"
         :data="recetaSeleccionada"
         @volver="recetaSeleccionada = null"
       />
 
-      <!-- Mostrar lista de recetas -->
+       
       <div class="abajo" v-else>
         <div class="subcontenedor">
           <div class="recetas-grid">
@@ -181,12 +182,14 @@ export default {
     color: #000;
     flex-direction: row;
     overflow: hidden;
+    background-color: white;
 }
 
 .derecha {
     width: 95%;
     height: 100%;
     overflow: hidden;
+    color: black;
 }
 .contenedor2 {
     width: 100%;
@@ -234,6 +237,7 @@ export default {
     width: 100%;
     overflow-y: auto;
     height: calc(100% - 60px);
+    background-color: white;
 }
 
 .subcontenedor {

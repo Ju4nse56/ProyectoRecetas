@@ -18,7 +18,7 @@
         <p class="description">{{ data.descripcion }}</p>
 
         <div class="prep-time">
-          <strong>Tiempo preparación</strong>
+          <strong>{{data.time}} Minutos</strong>
           <div>
             {{ data.rating }}
             <span class="stars">★★★★★</span>
@@ -197,13 +197,22 @@ export default {
   padding: 6px;
   border-radius: 4px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .ingredients,
 .preparation {
   margin-bottom: 20px;
+  background-color: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
 }
-
+ul{
+  text-align: left;
+}
 .ingredients ul {
   list-style-type: none;
 }
