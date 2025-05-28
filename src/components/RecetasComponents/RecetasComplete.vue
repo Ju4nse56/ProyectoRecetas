@@ -14,16 +14,17 @@
       </div>
 
       <section class="details">
-        <h2>{{ data.nombre }}</h2>
-        <p class="description">{{ data.descripcion }}</p>
+        <h2>{{ data.tittle }}</h2>
+        <p class="description">{{ data.description }}</p>
 
         <div class="prep-time">
-          <strong>{{data.time}} Minutos</strong>
+          <strong>{{data.preparation_time}} </strong>
           <div>
-            {{ data.rating }}
-            <span class="stars">★★★★★</span>
+            {{ data.cateories }}
+            
           </div>
         </div>
+        
 
         <select class="portion-selector">
           <option v-for="op in data.porciones" :key="op">{{ op }}</option>
@@ -38,7 +39,7 @@
 
         <div class="preparation">
           <h3>Preparación</h3>
-          <p>{{ data.preparacion }}</p>
+          <p>{{ data.instructions }}</p>
         </div>
       </section>
 
@@ -82,7 +83,7 @@ export default {
         if (urlObj.hostname.includes('youtube.com')) {
           return urlObj.searchParams.get('v');
         } else if (urlObj.hostname.includes('youtu.be')) {
-          return urlObj.pathname.slice(1); // elimina la barra inicial
+          return urlObj.pathname.slice(1); 
         }
         return '';
       } catch (e) {
@@ -91,7 +92,7 @@ export default {
     }
   },
   mounted() {
-    const videoId = this.extractVideoId(this.data.videoUrl);
+    const videoId = this.extractVideoId(this.data.video);
     if (videoId) {
       this.videoUrl = `https://www.youtube.com/embed/${videoId}`;
     }
