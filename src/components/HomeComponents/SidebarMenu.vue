@@ -76,6 +76,10 @@ export default {
       this.showChatModal = !this.showChatModal;
     },
     logout: async function () {
+      const confirmacion = window.confirm("¿Estás seguro de esta acción?");
+      if (!confirmacion) {
+        return;
+      }
       try {
         const url = "http://127.0.0.1:8000/api/logout";
         await this.axios.post(

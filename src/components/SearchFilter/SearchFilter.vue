@@ -70,6 +70,7 @@ export default {
       text: "",
     };
   },
+
   components: {
     ImagenAtras,
     SidebarMenu,
@@ -81,7 +82,7 @@ export default {
       try {
         const url = "http://127.0.0.1:8000/api/recipes?search=" + this.text;
         const response = await this.axios.get(url, this.user);
-        if (response.data.status === 200) {
+        if (response.data.status === 200 ) {
           this.recetas = response.data.data;
           console.log(this.recetas);
           console.log(response.data);
@@ -89,7 +90,7 @@ export default {
           alert(response.data.message);
         }
       } catch (error) {
-        if (error.response && error.response.data) {
+        if (error.response && error.response.data && !this.text===null) {
           alert(error.response.data.message || "Error en la solicitud") +
             (error.response.data.errors
               ? ": " + JSON.stringify(error.response.data.errors)
@@ -101,6 +102,17 @@ export default {
         console.log("Proceso terminado");
       }
     },
+
+    setText: function () {
+      this.text = localStorage.getItem('texto');
+      localStorage.removeItem('texto');
+      console.log(this.text)
+      this.search();
+    },
+  },
+
+  created: function () {
+    this.setText();
   },
 };
 </script>

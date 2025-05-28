@@ -3,7 +3,7 @@
         <div class="blur-container">
             <h1 class="title">Try it</h1>
             <div class="search-container">
-                <input type="text" placeholder="Buscar" class="search-input">
+                <input type="text" placeholder="Buscar" class="search-input" v-model="text" @keyup.enter="search">
             </div>
         </div>
     </div>
@@ -11,7 +11,20 @@
 
 <script>
 export default {
-    name: 'SearchBar'
+    name: 'SearchBar',
+
+    data() {
+        return {
+            text: ""
+        }
+    },
+
+    methods: {
+        search: function() {
+            localStorage.setItem('texto', this.text);
+            this.$router.push('/Search');
+        }
+    },
 }
 </script>
 
