@@ -3,19 +3,19 @@
     <h2>Bienvenido</h2>
 
     <div class="input-group">
-      <input v-model="user.name" type="user" placeholder="Usuario" />
+      <input v-model="user.name" type="user" placeholder="Usuario" @keyup.enter="register"/>
     </div>
     <br />
     <div class="input-group">
-      <input v-model="user.email" type="email" placeholder="E-mail" />
+      <input v-model="user.email" type="email" placeholder="E-mail" @keyup.enter="register"/>
     </div>
     <br />
     <div class="input-group">
-      <input v-model="user.password" type="password" placeholder="Contraseña" />
+      <input v-model="user.password" type="password" placeholder="Contraseña" @keyup.enter="register"/>
     </div>
     <br />
     <div class="input-group">
-      <input v-model="user.password_confirmation" type="password" placeholder="Confirmar contraseña" />
+      <input v-model="user.password_confirmation" type="password" placeholder="Confirmar contraseña" @keyup.enter="register"/>
     </div>
     <br />
 

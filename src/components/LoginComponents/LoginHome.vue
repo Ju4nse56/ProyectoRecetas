@@ -5,11 +5,11 @@
         <br>
 
         <div class="input-group">
-            <input v-model="user.email" type="email" placeholder="E-mail">
+            <input v-model="user.email" type="email" placeholder="E-mail" @keyup.enter="login">
         </div>
         <br>
         <div class="input-group">
-            <input v-model="user.password" type="password" placeholder="Contraseña">
+            <input v-model="user.password" type="password" placeholder="Contraseña" @keyup.enter="login">
         </div>
         <br>
 

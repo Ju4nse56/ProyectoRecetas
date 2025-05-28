@@ -1,31 +1,32 @@
 <template>
   <div class="card" @click="$emit('click')">
     <div class="card-content">
-      <div class="recipe-title">{{ recipe.nombre }}</div>
+      <div class="recipe-title">{{ tittle }}</div>
       <div class="recipe-description">
         <div class="recipe-time">
           <img class="time-icon" src="@/assets/imgRecetas/time.png" alt="tiempo" />
-          <span>{{recipe.time}} minutos</span>
+          <span>{{preparation_time}} min</span>
         </div>
       </div>
       <div class="favorite-button">
         <img :src="require('@/assets/imgMenu/favorite.png')" alt="Favorito" />
       </div>
       <div class="card-image">
-        <img class="recipe-image" :src="recipe.image" alt="Receta" />
+        <img class="recipe-image" :src="image" alt="Receta" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'CardComponent',
   props: {
-    recipe: {
-      type: Object,
-      required: true
-    }
+    id: Number,
+    tittle: String,
+    image: String,
+    preparation_time: Number
   }
 }
 </script>

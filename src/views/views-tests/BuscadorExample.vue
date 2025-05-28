@@ -1,6 +1,5 @@
 <template>
-  <div class="main-container">
-    <SidebarMenu />
+  <div class="layout">
     <div class="search-layout">
       <div class="atras">
         <ImagenAtras />
@@ -13,16 +12,8 @@
           @keyup.enter="search"
           v-model="text"
         />
-        <div class="filter" @click="showFilterModal = true">
-          <img
-            class="icon"
-            :src="require('@/assets/imgSearch/filtrar.png')"
-            alt="Filtrar"
-          />
-        </div>
       </div>
     </div>
-
     <div class="resultado" v-for="receta in recetas" :key="receta.id">
       <CardComponent
         :id="receta.id"
@@ -31,49 +22,22 @@
         :image="receta.image"
       />
     </div>
-
-    <!-- Modal de filtros -->
-    <div class="filter-modal" :class="{ 'show-modal': showFilterModal }">
-      <div class="filter-content">
-        <div class="filter-header">
-          <p>Filtra las recetas</p>
-        </div>
-        <ul>
-          <li>Todas</li>
-          <li>Tipos de comida</li>
-          <li>Tiempo de preparación</li>
-        </ul>
-        <button @click="showFilterModal = false">Cerrar</button>
-      </div>
-    </div>
-
-    <!-- Overlay para cuando el modal está activo -->
-    <div
-      class="modal-overlay"
-      v-if="showFilterModal"
-      @click="showFilterModal = false"
-    ></div>
   </div>
 </template>
 
 <script>
 import CardComponent from "@/components/CardComponent/CardComponent.vue";
-import ImagenAtras from "../CategoriaComponents/ImagenAtras.vue";
-import SidebarMenu from "@/components/HomeComponents/SidebarMenu.vue";
 
 export default {
-  name: "SearchFilter",
+  components:{
+    CardComponent
+  },
+
   data() {
     return {
-      showFilterModal: false,
       recetas: [],
       text: "",
     };
-  },
-  components: {
-    ImagenAtras,
-    SidebarMenu,
-    CardComponent,
   },
 
   methods: {
@@ -105,7 +69,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .search-layout {
   display: flex;
   align-items: center;
