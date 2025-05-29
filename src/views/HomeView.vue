@@ -1,70 +1,94 @@
 <template>
-    <div class="main-container">
-        <SidebarMenu />
-        <div class="content">
-            <SearchBar />
-            <div class="main-content">
-                <el-carousel :interval="4000" type="card" arrow="always" height="250px">
-                    <el-carousel-item v-for="recipe in recipes" :key="recipe.id">
-                        <div class="recipe-card">
-                            <div class="recipe-image">
-                                <img :src="require(`@/assets/imgRecetas/${recipe.image}`)" alt="">
-                                <div class="save-icon" @click.stop="toggleSaved(recipe.id)">
-                                    <img class="icon-img" src="@/assets/imgRecetas/guardar.png" alt="guardar" />
-                                </div>
-                            </div>
-                            <div class="recipe-info">
-                                <h3 class="recipe-name">{{ recipe.name }}</h3>
-                                <div class="recipe-time">
-                                    <img class="time-icon" src="@/assets/imgRecetas/time.png" alt="tiempo">
-                                    <span>{{ recipe.time }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </el-carousel-item>
-                </el-carousel>
-                <CategoriesComponent />
-                <RecommendationsComponent />
+  <div class="main-container">
+    <SidebarMenu />
+    <div class="content">
+      <SearchBar />
+      <div class="main-content">
+        <el-carousel :interval="4000" type="card" arrow="always" height="250px">
+          <el-carousel-item v-for="recipe in recipes" :key="recipe.id">
+            <div class="recipe-card">
+              <div class="recipe-image">
+                <img :src="getImagePath(recipe.image)" alt="Imagen de receta" />
+                <div class="save-icon" @click.stop="toggleSaved(recipe.id)">
+                  <img class="icon-img" src="@/assets/imgRecetas/guardar.png" alt="guardar" />
+                </div>
+              </div>
+              <div class="recipe-info">
+                <h3 class="recipe-name">{{ recipe.tittle}}</h3>
+                <div class="recipe-time">
+                  <img class="time-icon" src="@/assets/imgRecetas/time.png" alt="tiempo" />
+                  <span>{{ recipe.preparation_time }}</span>
+                </div>
+              </div>
             </div>
-        </div>
+          </el-carousel-item>
+        </el-carousel>
+
+        <CategoriesComponent />
+        <RecommendationsComponent />
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
 import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
 import SearchBar from '@/components/HomeComponents/SearchBar.vue';
 import CategoriesComponent from '@/components/HomeComponents/CategoriesComponent.vue';
 import RecommendationsComponent from '@/components/HomeComponents/RecommendationsComponent.vue';
 
 export default {
-    name: 'HomeView',
-    components: {
-        SidebarMenu,
-        SearchBar,
-        CategoriesComponent,
-        RecommendationsComponent
-    },
-    data() {
-        return {
-            recipes: [
-                { id: 1, name: 'Goulash Húngaro', time: '45 min', image: 'goulash.jpg-editada-removebg-preview.png', saved: false },
-                { id: 2, name: 'Pasta Carbonara', time: '30 min', image: 'goulash.jpg-editada-removebg-preview.png', saved: true },
-                { id: 3, name: 'Pollo al Curry', time: '50 min', image: 'goulash.jpg-editada-removebg-preview.png', saved: false },
-                { id: 4, name: 'Tacos de Carnitas', time: '40 min', image: 'goulash.jpg-editada-removebg-preview.png', saved: false },
-                { id: 5, name: 'Lasaña Vegetariana', time: '60 min', image: 'goulash.jpg-editada-removebg-preview.png', saved: false },
-                { id: 6, name: 'Sushi Roll', time: '75 min', image: 'goulash.jpg-editada-removebg-preview.png', saved: false }
-            ]
-        };
-    },
-    methods: {
-        toggleSaved(id) {
-            const recipe = this.recipes.find(r => r.id === id);
-            if (recipe) recipe.saved = !recipe.saved;
+  name: 'HomeView',
+  components: {
+    SidebarMenu,
+    SearchBar,
+    CategoriesComponent,
+    RecommendationsComponent
+  },
+  data() {
+    return {
+      recipes: [],
+      error: null,
+      user: {
+        headers: {
+          Accept: 'application/json',
+          // Authorization: 'Bearer tu_token' // descomenta si necesitas autenticación
         }
+      }
+    };
+  },
+  methods: {
+    async fetchRecipes() {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/recipes", this.user);
+        if (response.data.status === 200) {
+          this.recipes = response.data.data;
+        } else {
+          alert(response.data.message || "No se pudieron cargar las recetas");
+        }
+      } catch (error) {
+        console.error(error);
+        this.error = "Error al cargar las recetas.";
+      }
+    },
+    toggleSaved(id) {
+      const recipe = this.recipes.find(r => r.id === id);
+      if (recipe) recipe.saved = !recipe.saved;
+    },
+    getImagePath(imageName) {
+      try {
+        return require(`@/assets/imgRecetas/${imageName}`);
+      } catch (e) {
+        return require('@/assets/imgRecetas/default.png');
+      }
     }
+  },
+  created() {
+    this.fetchRecipes();
+  }
 };
 </script>
-
 <style>
 .main-container {
     display: flex;

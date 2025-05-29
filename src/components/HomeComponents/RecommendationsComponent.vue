@@ -71,78 +71,7 @@ export default {
   name: "RecommendationsComponent",
   data() {
     return {
-      recipes: [
-        {
-          id: 1,
-          name: "Tarta de Manzana",
-          time: "35 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 2,
-          name: "Ramen Japonés",
-          time: "45 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 3,
-          name: "Arepas con Queso",
-          time: "20 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 4,
-          name: "Lasaña Casera",
-          time: "60 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 5,
-          name: "Tacos de Pollo",
-          time: "25 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 6,
-          name: "Sushi Rolls",
-          time: "40 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 7,
-          name: "Arepas con Queso",
-          time: "20 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 8,
-          name: "Lasaña Casera",
-          time: "60 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 9,
-          name: "Tacos de Pollo",
-          time: "25 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-        {
-          id: 10,
-          name: "Sushi Rolls",
-          time: "40 min",
-          image: "goulash.jpg-editada-removebg-preview.png",
-          saved: false,
-        },
-      ],
+      recipes: [],
       paginaActual: 0,
       recipesPerPage: 3,
     };
@@ -165,6 +94,27 @@ export default {
     nextPage() {
       if (this.hasMorePages) this.paginaActual++;
     },
+    getMealType() {
+      const hour = new Date().getHours();
+      if (hour >= 4 && hour <= 10) return "desayuno";
+      if (hour >= 11 && hour <= 13) return "almuerzo";
+      if (hour >= 14 && hour <= 17) return "postre";
+      if (hour >= 18 && hour <= 22) return "cena";
+      return "otros";
+    },
+    async fetchRecipesByMealType() {
+      const mealType = this.getMealType();
+      try {
+        const response = await fetch(`https://tu-api.com/recetas?tipo=${mealType}`);
+        const data = await response.json();
+        this.recipes = data;
+      } catch (error) {
+        console.error("Error al obtener recetas:", error);
+      }
+    },
+  },
+  mounted() {
+    this.fetchRecipesByMealType();
   },
 };
 </script>

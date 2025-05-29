@@ -7,7 +7,6 @@ import FavoritosView from '@/views/FavoritosView.vue'
 import ActualizacionesView from '@/views/ActualizacionesView.vue'
 import SearchView from '@/views/SearchView.vue'
 import RecetasView from '@/views/RecetasView.vue'
-import BuscadorExample from '@/views/views-tests/BuscadorExample.vue'
 const routes = [
   {
     
@@ -52,11 +51,6 @@ const routes = [
     name: 'Receta',
     component: RecetasView
   },
-  {
-    path: '/Example',
-    name: 'search',
-    component: BuscadorExample
-  }
 ]
 
 const router = createRouter({
