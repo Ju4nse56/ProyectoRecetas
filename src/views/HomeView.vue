@@ -8,7 +8,7 @@
           <el-carousel-item v-for="recipe in recipes" :key="recipe.id">
             <div class="recipe-card">
               <div class="recipe-image">
-                <img :src="getImagePath(recipe.image)" alt="Imagen de receta" />
+                <img :src="recipe.image" alt="Imagen de receta" />
                 <div class="save-icon" @click.stop="toggleSaved(recipe.id)">
                   <img class="icon-img" src="@/assets/imgRecetas/guardar.png" alt="guardar" />
                 </div>
@@ -53,7 +53,6 @@ export default {
       user: {
         headers: {
           Accept: 'application/json',
-          // Authorization: 'Bearer tu_token' // descomenta si necesitas autenticación
         }
       }
     };
@@ -72,17 +71,10 @@ export default {
         this.error = "Error al cargar las recetas.";
       }
     },
-    toggleSaved(id) {
-      const recipe = this.recipes.find(r => r.id === id);
-      if (recipe) recipe.saved = !recipe.saved;
-    },
-    getImagePath(imageName) {
-      try {
-        return require(`@/assets/imgRecetas/${imageName}`);
-      } catch (e) {
-        return require('@/assets/imgRecetas/default.png');
-      }
-    }
+     toggleSaved(id) {
+       const recipe = this.recipes.find(r => r.id === id);
+       if (recipe) recipe.saved = !recipe.saved;
+     },
   },
   created() {
     this.fetchRecipes();
