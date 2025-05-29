@@ -22,6 +22,7 @@
           class="recommendation-item"
           v-for="receta in recetas"
           :key="receta.id"
+          @click="getRecipe(receta.id)"
         >
           <div class="image-container">
             <img :src="receta.image" alt="receta" />
@@ -42,7 +43,7 @@
                 src="@/assets/imgRecetas/time.png"
                 alt="tiempo"
               />
-              <span>{{ receta.preparation_time }}</span>
+              <span>{{ receta.preparation_time }} min</span>
             </div>
           </div>
         </div>
@@ -139,6 +140,9 @@ export default {
       } finally {
         console.log("Carga de recetas finalizada.");
       }
+    },
+    getRecipe: function (id) {
+      this.$router.push('/receta/' + id)
     },
   },
   created: function () {
