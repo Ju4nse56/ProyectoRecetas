@@ -1,18 +1,10 @@
 <template>
   <div class="container">
     <div class="scrollable-content">
-      <button class="back-button" @click="$emit('volver')">←</button>
+      <button class="back-button" @click="goBack()">←</button>
 
       <div class="video-wrapper">
-        <!-- <iframe
-          :src="receta.video"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          class="video-player"
-        >
-        </iframe> -->
-        <img class="video-player" :src="receta.image" alt="" />
+        <img class="video-player" :src="receta.image" alt="" /> 
       </div>
 
       <section class="details">
@@ -21,23 +13,26 @@
 
         <div class="prep-time">
           <strong>{{ receta.preparation_time }} min</strong>
+        </div>
+        <div class="categoria-etiquetas">
+    
+        <div class="categorias">
           <h4>Categorias</h4>
-          <div
-            class="vfor"
-            v-for="category in receta.categories"
-            :key="category.id"
-          >
+          <div class="vfor" v-for="category in receta.categories" :key="category.id">
             <div>
               {{ category }}
             </div>
           </div>
-          <h4>Etiquetas</h4>
-          <div class="vfor" v-for="label in receta.labels" :key="label.id">
-            <div>
-              {{ label }}
-            </div>
+        </div>
+        <div class="etiquetas">
+        <h4>Etiquetas</h4>
+        <div class="vfor" v-for="label in receta.labels" :key="label.id">
+          <div>
+            {{ label }}
           </div>
         </div>
+       </div>
+       </div>
 
         <!-- <select class="portion-selector">
           <option v-for="op in data.porciones" :key="op">{{ op }}</option>
@@ -57,28 +52,22 @@
       </section>
 
       <section class="rating-section">
-        <h3>Califica esta receta</h3>
+        
+        <div class="promedio">
         <div>Total valoraciones: {{ receta.total_ratings }}</div>
         <div>Promedio de valoraciones: {{ receta.average_rating }}</div>
+        </div>
         <div class="comment-box">
-          <input
-            type="text"
-            placeholder="Agregar un comentario"
-            v-model="rates.comment"
-          />
-          <input type="number" max="5" min="0" required v-model="rates.rate" />
+          <input placeholder="Agregar una valoracion" type="number" max="5" min="0" required v-model="rates.rate" />
+          
+          <input type="text" placeholder="Agregar un comentario" v-model="rates.comment" />
           <button @click="rating">Enviar</button>
         </div>
       </section>
 
       <br /><br /><br />
 
-      <div
-        class="vfor"
-        v-for="comment in receta.comments"
-        :key="comment.id"
-        style="border: black 2px solid"
-      >
+      <div class="vfor" v-for="comment in receta.comments" :key="comment.id">
         <div class="cube">
           <p>{{ comment.user_name }}:</p>
           <p>{{ comment.comment }}</p>
@@ -105,6 +94,14 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        console.log("No hay una página anterior en el historial.");
+      }
+    },
+
     getReceta: async function () {
       try {
         const router = useRoute();
@@ -159,12 +156,23 @@ export default {
 </script>
 
 <style scoped>
+.promedio{
+  text-align: left;
+}
 .container {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
-
+.categoria-etiquetas{
+  display: flex;
+  gap: 20%;
+  width: 100%;
+  height: auto;
+}
+.etiquetas{
+  text-align: center;
+}
 .back-button {
   position: absolute;
   top: 10px;
@@ -196,8 +204,46 @@ export default {
 .video-player {
   width: 560px;
   height: 315px;
-  border: 2px solid #000;
   border-radius: 10px;
+  object-fit: cover;
+}
+
+.details {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.prep-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.vfor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.vfor div {
+  background-color: #e0e0e0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .rating-section {
@@ -207,17 +253,15 @@ export default {
   border-radius: 10px;
 }
 
-.stars {
-  color: black;
-  font-size: 20px;
-}
-
 .comment-box {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 10px;
 }
 
-.comment-box input {
+.comment-box input[type="text"],
+.comment-box input[type="number"] {
   flex: 1;
   padding: 8px;
   border: 1px solid #ccc;
@@ -228,58 +272,65 @@ export default {
   background-color: black;
   color: white;
   padding: 8px 12px;
-  margin-left: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.details {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 20px;
-  margin-top: 20px;
-}
-
-.description {
-  margin-bottom: 20px;
-}
-
-.prep-time {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.portion-selector {
-  padding: 6px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: flex-start;
-}
-
 .ingredients,
 .preparation {
   margin-bottom: 20px;
-  background-color: none;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   flex-direction: column;
 }
-ul {
+
+.preparation h3 {
   text-align: left;
-}
-.ingredients ul {
-  list-style-type: none;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 500px) {
+.ingredients ul,
+.preparation p {
+  text-align: left;
+}
+
+.ingredients ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.cube {
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cube:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cube p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+@media (max-width: 768px) {
   .video-player {
     width: 100%;
-    height: 215px;
+    height: auto;
+  }
+
+  .details {
+    padding: 15px;
+  }
+
+  .comment-box {
+    flex-direction: column;
   }
 }
 </style>

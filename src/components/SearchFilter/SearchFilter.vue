@@ -1,6 +1,8 @@
 <template>
   <div class="main-container">
     <SidebarMenu />
+    <div class="todo">
+    <div class="arriba">
     <div class="search-layout">
       <div class="atras">
         <ImagenAtras />
@@ -22,16 +24,19 @@
         </div>
       </div>
     </div>
-
-    <div class="resultado" v-for="receta in recetas" :key="receta.id">
+    </div>
+    <div class="abajo">
+    <div class="resultado" >
       <CardComponent
+        v-for="receta in recetas" :key="receta.id"
         :id="receta.id"
         :tittle="receta.tittle"
         :preparation_time="receta.preparation_time"
         :image="receta.image"
       />
     </div>
-
+    </div>
+    </div>
     <!-- Modal de filtros -->
     <div class="filter-modal" :class="{ 'show-modal': showFilterModal }">
       <div class="filter-content">
@@ -53,6 +58,7 @@
       v-if="showFilterModal"
       @click="showFilterModal = false"
     ></div>
+    
   </div>
 </template>
 
@@ -118,6 +124,39 @@ export default {
 </script>
 
 <style scoped>
+.arriba {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    padding: 0 10px;
+}
+.abajo {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+    height: calc(100% - 60px);
+}
+.todo{
+    width: 95%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.resultado{
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0;
+    justify-items: center;
+}
 .search-layout {
   display: flex;
   align-items: center;

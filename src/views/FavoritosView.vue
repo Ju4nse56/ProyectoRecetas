@@ -51,9 +51,9 @@ export default {
       recetaSeleccionada: null,
       recetas: [
         {
-          nombre: 'Quiche de verduras',
-          descripcion: 'Una deliciosa quiche casera.',
-          videoUrl: 'https://youtu.be/oVYfDQ2J6fg?si=MYRMthPwlT3lCK2H',
+          tittle: 'Quiche de verduras',
+          description: 'Una deliciosa quiche casera.',
+          video: 'https://youtu.be/oVYfDQ2J6fg?si=MYRMthPwlT3lCK2H',
           rating: 4.5,
           porciones: ['2 porciones', '4 porciones'],
           ingredientes: ['Huevos', 'Espinaca', 'Queso', 'Masa quebrada'],
