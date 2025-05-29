@@ -41,6 +41,7 @@ export default {
           const url = "http://127.0.0.1:8000/api/login";
           const response = await this.axios.post(url, this.user);
           if (response.data.status === 200) {
+            console.log("aaa");
             this.token = response.data.token;
             localStorage.setItem('token', response.data.token);
             this.navigateToHome()

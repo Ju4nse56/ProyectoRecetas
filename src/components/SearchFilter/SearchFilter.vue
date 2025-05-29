@@ -85,7 +85,7 @@ export default {
         if (response.data.status === 200 ) {
           this.recetas = response.data.data;
           console.log(this.recetas);
-          console.log(response.data);
+          console.log(response.data.data);
         } else {
           alert(response.data.message);
         }
