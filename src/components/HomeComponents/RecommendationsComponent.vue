@@ -20,14 +20,11 @@
       <div class="recommendation-items">
         <div
           class="recommendation-item"
-          v-for="recipe in visibleRecipes"
-          :key="recipe.id"
+          v-for="receta in recetas"
+          :key="receta.id"
         >
           <div class="image-container">
-            <img
-              :src="require(`@/assets/imgRecetas/${recipe.image}`)"
-              alt="receta"
-            />
+            <img :src="receta.image" alt="receta" />
             <div class="save-icon">
               <img
                 class="icon-img"
@@ -38,14 +35,14 @@
           </div>
 
           <div class="recommendation-info">
-            <h3 class="title">{{ recipe.name }}</h3>
+            <h3 class="title">{{ receta.tittle }}</h3>
             <div class="recipe-time">
               <img
                 class="time-icon"
                 src="@/assets/imgRecetas/time.png"
                 alt="tiempo"
               />
-              <span>{{ recipe.time }}</span>
+              <span>{{ receta.preparation_time }}</span>
             </div>
           </div>
         </div>
@@ -71,19 +68,21 @@ export default {
   name: "RecommendationsComponent",
   data() {
     return {
-      recipes: [],
+      recetas: [],
       paginaActual: 0,
       recipesPerPage: 3,
+      name: "",
+      id: 0,
     };
   },
   computed: {
     visibleRecipes() {
       const start = this.paginaActual * this.recipesPerPage;
-      return this.recipes.slice(start, start + this.recipesPerPage);
+      return this.recetas.slice(start, start + this.recipesPerPage);
     },
     hasMorePages() {
       return (
-        (this.paginaActual + 1) * this.recipesPerPage < this.recipes.length
+        (this.paginaActual + 1) * this.recipesPerPage < this.recetas.length
       );
     },
   },
@@ -94,28 +93,57 @@ export default {
     nextPage() {
       if (this.hasMorePages) this.paginaActual++;
     },
-    getMealType() {
+    getMealType: function () {
       const hour = new Date().getHours();
-      if (hour >= 4 && hour <= 10) return "desayuno";
-      if (hour >= 11 && hour <= 13) return "almuerzo";
-      if (hour >= 14 && hour <= 17) return "postre";
-      if (hour >= 18 && hour <= 22) return "cena";
-      return "otros";
+      if (hour >= 4 && hour <= 10) {
+        this.id = 2
+      }
+      if (hour >= 11 && hour <= 13) {
+        this.id = 3
+      }
+      if (hour >= 14 && hour <= 17) {
+        this.id = 5
+      }
+      if (hour >= 18 && hour <= 22) {
+        this.id = 4
+      }
+      this.getCategory();
     },
-    // async fetchRecipesByMealType() {
-    //   const mealType = this.getMealType();
-    //   try {
-    //     const response = await fetch(`https://tu-api.com/recetas?tipo=${mealType}`);
-    //     const data = await response.json();
-    //     this.recipes = data;
-    //   } catch (error) {
-    //     console.error("Error al obtener recetas:", error);
-    //   }
-    // },
+
+    getCategory: async function () {
+      try {
+        const url =
+          "http://127.0.0.1:8000/api/categories/" + this.id + "/recipes";
+        const response = await this.axios.get(url);
+
+        if (response.data.status === 200) {
+          this.recetas = response.data.data;
+          this.name = response.data.categories;
+          console.log(this.recetas);
+        } else {
+          alert(response.data.message);
+        }
+      } catch (error) {
+        if (error.response && error.response.data && this.nombre !== null) {
+          alert(
+            error.response.data.message ||
+              "Error en la solicitud" +
+                (error.response.data.errors
+                  ? ": " + JSON.stringify(error.response.data.errors)
+                  : "")
+          );
+        } else {
+          console.error(error);
+          this.error = "Error en la solicitud";
+        }
+      } finally {
+        console.log("Carga de recetas finalizada.");
+      }
+    },
   },
-  // mounted() {
-  //   this.fetchRecipesByMealType();
-  // },
+  created: function () {
+    this.getMealType();
+  },
 };
 </script>
 

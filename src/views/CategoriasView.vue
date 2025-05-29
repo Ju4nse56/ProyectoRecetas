@@ -1,97 +1,66 @@
 <template>
   <div class="main-container">
     <SidebarMenu />
-
-    <div class="derecha">
-      <div class="arriba">
-        <div class="atras">
-          <ImagenAtras v-if="!recetaSeleccionada" />
-        </div>
-        <div class="Titulo">
-          <h1 class="titulo1">{{ nombre }}</h1>
-        </div>
-      </div>
-
-      <RecetasComplete
-        v-if="recetaSeleccionada"
-        :data="recetaSeleccionada"
-        @volver="recetaSeleccionada = null"
-      />
-
-      <div class="abajo" v-else>
-        <div class="subcontenedor">
-          <div class="recetas-grid">
-            <CardComponent
-              v-for="(receta, index) in recetas"
-              :key="receta.id || index"
-              :recipe="receta"
-              @click="mostrarReceta(receta)"
-            />
-          </div>
-        </div>
+    <div class="Titulo">
+      <h1 class="titulo1">{{ name }}</h1>
+      <div class="vfor" v-for="receta in recetas" :key="receta.id">
+        <CardComponent
+          :id="receta.id"
+          :tittle="receta.tittle"
+          :image="receta.image"
+          :preparation_time="receta.preparation_time"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SidebarMenu from '@/components/HomeComponents/SidebarMenu.vue';
-import ImagenAtras from '@/components/CategoriaComponents/ImagenAtras.vue';
-import CardComponent from '@/components/CardComponent/CardComponent.vue';
-import RecetasComplete from '@/components/RecetasComponents/RecetasComplete.vue';
-import axios from 'axios';
+import SidebarMenu from "@/components/HomeComponents/SidebarMenu.vue";
+// import ImagenAtras from "@/components/CategoriaComponents/ImagenAtras.vue";
+import CardComponent from "@/components/CardComponent/CardComponent.vue";
+// import RecetasComplete from '@/components/RecetasComponents/RecetasComplete.vue';
+import axios from "axios";
+import { useRoute } from "vue-router";
 
 export default {
-  name: 'CategoriasView',
+  name: "CategoriasView",
   components: {
     SidebarMenu,
-    ImagenAtras,
+    // ImagenAtras,
     CardComponent,
-    RecetasComplete
+    // RecetasComplete
   },
-  props: {
-    nombre: {
-      type: String,
-      required: true
-    }
-  },
+
   data() {
     return {
-      recetaSeleccionada: null,
       recetas: [],
-      error: null,
-      user: {
-        headers: {
-          Accept: 'application/json',
-          // Authorization: 'Bearer tu_token', // Si necesitas autenticación
-        }
-      }
+      name: "",
     };
   },
   methods: {
-    mostrarReceta(receta) {
-      this.recetaSeleccionada = receta;
-    },
-
     async cargarRecetasPorNombre() {
+      const router = useRoute();
+      this.id = router.params.id;
       try {
-        const categoria = this.nombre;
-        const url = `http://127.0.0.1:8000/api/recipes?search=${categoria}`;
-        const response = await axios.get(url, this.user);
+        const url =
+          "http://127.0.0.1:8000/api/categories/" + this.id + "/recipes";
+        const response = await axios.get(url);
 
         if (response.data.status === 200) {
           this.recetas = response.data.data;
-          console.log(this.recetas);
+          this.name = response.data.categories;
         } else {
           alert(response.data.message);
         }
       } catch (error) {
         if (error.response && error.response.data && this.nombre !== null) {
           alert(
-            error.response.data.message || "Error en la solicitud" +
-            (error.response.data.errors
-              ? ": " + JSON.stringify(error.response.data.errors)
-              : "")
+            error.response.data.message ||
+              "Error en la solicitud" +
+                (error.response.data.errors
+                  ? ": " + JSON.stringify(error.response.data.errors)
+                  : "")
           );
         } else {
           console.error(error);
@@ -100,11 +69,11 @@ export default {
       } finally {
         console.log("Carga de recetas finalizada.");
       }
-    }
+    },
   },
   created() {
     this.cargarRecetasPorNombre();
-  }
+  },
 };
 </script>
 

@@ -4,14 +4,15 @@
       <button class="back-button" @click="$emit('volver')">←</button>
 
       <div class="video-wrapper">
-        <iframe
+        <!-- <iframe
           :src="receta.video"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           class="video-player"
         >
-        </iframe>
+        </iframe> -->
+        <img class="video-player" :src="receta.image" alt="" />
       </div>
 
       <section class="details">
@@ -57,6 +58,8 @@
 
       <section class="rating-section">
         <h3>Califica esta receta</h3>
+        <div>Total valoraciones: {{ receta.total_ratings }}</div>
+        <div>Promedio de valoraciones: {{ receta.average_rating }}</div>
         <div class="comment-box">
           <input
             type="text"
@@ -70,9 +73,14 @@
 
       <br /><br /><br />
 
-      <div class="vfor" v-for="comment in receta.comments" :key="comment.id" style="border: black 2px solid;">
+      <div
+        class="vfor"
+        v-for="comment in receta.comments"
+        :key="comment.id"
+        style="border: black 2px solid"
+      >
         <div class="cube">
-          <p>{{ comment.user_name }}: </p>
+          <p>{{ comment.user_name }}:</p>
           <p>{{ comment.comment }}</p>
           <p>{{ comment.rate }}</p>
         </div>
@@ -92,7 +100,7 @@ export default {
       receta: {},
       rates: {
         comment: "",
-        rate: 0,
+        rate: "",
       },
     };
   },
@@ -123,8 +131,8 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        if (response.data.status === 200) {
-          this.getReceta();
+        if (response.data.status === 201) {
+          window.location.reload();
         } else {
           alert(response.data.message);
           console.log(response.data.error);

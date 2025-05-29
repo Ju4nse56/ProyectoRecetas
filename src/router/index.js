@@ -28,7 +28,7 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
-    path: '/Categoria/:nombre',
+    path: '/categoria/:id',
     name: 'Categoria',
     component: CategoriasView,
     props:true,

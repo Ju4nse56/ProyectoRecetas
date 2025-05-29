@@ -8,7 +8,7 @@
         class="category-card"
         v-for="(category, index) in categories"
         :key="index"
-        @click="handleClick(category.name)"
+        @click="getCategory(category.id)"
       >
         <img :src="category.icon" alt="icono" class="category-icon" />
         <p>{{ category.name }}</p>
@@ -26,33 +26,8 @@ export default {
     };
   },
   methods: {
-    irACategoria(nombre) {
-      this.$router.push({ name: "Categoria", params: { nombre } });
-    },
-
-    handleClick(categoryName) {
-      switch (categoryName) {
-        case "Desayuno":
-          this.irACategoria("Desayuno");
-          break;
-        case "Almuerzo":
-          this.irACategoria("Almuerzo");
-          break;
-        case "Cena":
-          this.irACategoria("Cena");
-          break;
-        case "Postre":
-          this.irACategoria("Postre");
-          break;
-        case "Vegana":
-          this.irACategoria("Vegana");
-          break;
-        case "Sin-gluten":
-          this.irACategoria("Sin-gluten");
-          break;
-        default:
-          alert("Categoría desconocida.");
-      }
+    getCategory: function (id) {
+      this.$router.push('/categoria/' + id)
     },
 
     getCategories: async function () {
