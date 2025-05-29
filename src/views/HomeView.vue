@@ -6,7 +6,7 @@
       <div class="main-content">
         <el-carousel :interval="4000" type="card" arrow="always" height="250px">
           <el-carousel-item v-for="recipe in recipes" :key="recipe.id">
-            <div class="recipe-card">
+            <div class="recipe-card" @click="getReceta(recipe.id)">
               <div class="recipe-image">
                 <img :src="recipe.image" alt="Imagen de receta" />
                 <div class="save-icon" @click.stop="toggleSaved(recipe.id)">
@@ -68,10 +68,7 @@ export default {
   methods: {
     async fetchRecipes() {
       try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/recipes",
-          this.user
-        );
+        const response = await axios.get("http://127.0.0.1:8000/api/recipes");
         if (response.data.status === 200) {
           this.recipes = response.data.data;
         } else {
@@ -82,6 +79,11 @@ export default {
         this.error = "Error al cargar las recetas.";
       }
     },
+
+    getReceta: function (id) {
+      this.$router.push('/receta/' + id);
+    },
+
     toggleSaved(id) {
       const recipe = this.recipes.find((r) => r.id === id);
       if (recipe) recipe.saved = !recipe.saved;

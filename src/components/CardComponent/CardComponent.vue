@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="$emit('click')">
+  <div class="card" @click="getReceta(id)">
     <div class="card-content">
       <div class="recipe-title">{{ tittle }}</div>
       <div class="recipe-description">
@@ -27,6 +27,12 @@ export default {
     tittle: String,
     image: String,
     preparation_time: Number
+  },
+
+  methods: {
+    getReceta: function (id) {
+      this.$router.push('/receta/' + id);
+    },
   }
 }
 </script>

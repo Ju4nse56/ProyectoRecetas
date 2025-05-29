@@ -3,100 +3,95 @@
     <div class="scrollable-content">
       <button class="back-button" @click="$emit('volver')">←</button>
 
-      <div class="video-wrapper" v-if="videoUrl">
+      <div class="video-wrapper">
         <iframe
-          :src="videoUrl"
+          :src="receta.video"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-          class="video-player">
+          class="video-player"
+        >
         </iframe>
       </div>
 
       <section class="details">
-        <h2>{{ data.tittle }}</h2>
-        <p class="description">{{ data.description }}</p>
+        <h2>{{ receta.tittle }}</h2>
+        <p class="description">{{ receta.description }}</p>
 
         <div class="prep-time">
-          <strong>{{data.preparation_time}} </strong>
+          <strong>{{ receta.preparation_time }} </strong>
           <div>
-            {{ data.cateories }}
-            
+            {{ receta.categories }}
           </div>
         </div>
-        
 
-        <select class="portion-selector">
+        <!-- <select class="portion-selector">
           <option v-for="op in data.porciones" :key="op">{{ op }}</option>
-        </select>
+        </select> -->
 
-        <div class="ingredients">
+        <!-- <div class="ingredients">
           <h3>Ingredientes</h3>
           <ul>
             <li v-for="(ing, i) in data.ingredientes" :key="i">{{ ing }}</li>
           </ul>
-        </div>
+        </div> -->
 
         <div class="preparation">
           <h3>Preparación</h3>
-          <p>{{ data.instructions }}</p>
+          <p>{{ receta.instructions }}</p>
         </div>
       </section>
 
       <section class="rating-section">
         <h3>Califica esta receta</h3>
         <div class="comment-box">
-          <input type="text" placeholder="Agregar un comentario" v-model="comment" />
+          <input
+            type="text"
+            placeholder="Agregar un comentario"
+            v-model="comment"
+          />
           <button @click="submitComment">Enviar</button>
         </div>
       </section>
-      <br><br><br>
+      <br /><br /><br />
     </div>
   </div>
 </template>
 
 <script>
+import { useRoute } from "vue-router";
 export default {
-  name: 'RecetasComplete',
-  props: {
-    data: {
-      type: Object,
-      required: true
-    }
-  },
+  name: "RecetasComplete",
+
   data() {
     return {
-      comment: '',
-      videoUrl: ''
+      id: 0,
+      receta: {},
     };
   },
   methods: {
-    submitComment() {
-      if (this.comment.trim()) {
-        alert(`Comentario enviado: ${this.comment}`);
-        this.comment = '';
+    getReceta: async function () {
+      try {
+        const router = useRoute();
+        this.id = router.params.id;
+        const response = await this.axios.get(
+          "http://127.0.0.1:8000/api/recipes/" + this.id
+        );
+        if (response.data.status === 200) {
+          this.receta = response.data.data;
+        } else {
+          alert(response.data.message || "No se pudieron cargar las recetas");
+        }
+      } catch (error) {
+        console.error(error);
+        this.error = "Error al cargar las recetas.";
       }
     },
-    extractVideoId(url) {
-      try {
-        const urlObj = new URL(url);
-        if (urlObj.hostname.includes('youtube.com')) {
-          return urlObj.searchParams.get('v');
-        } else if (urlObj.hostname.includes('youtu.be')) {
-          return urlObj.pathname.slice(1); 
-        }
-        return '';
-      } catch (e) {
-        return '';
-      }
-    }
   },
+
   mounted() {
-    const videoId = this.extractVideoId(this.data.video);
-    if (videoId) {
-      this.videoUrl = `https://www.youtube.com/embed/${videoId}`;
-    }
-  }
+    this.getReceta();
+  },
 };
 </script>
 
@@ -211,7 +206,7 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
 }
-ul{
+ul {
   text-align: left;
 }
 .ingredients ul {

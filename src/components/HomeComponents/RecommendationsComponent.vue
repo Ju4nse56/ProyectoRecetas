@@ -102,20 +102,20 @@ export default {
       if (hour >= 18 && hour <= 22) return "cena";
       return "otros";
     },
-    async fetchRecipesByMealType() {
-      const mealType = this.getMealType();
-      try {
-        const response = await fetch(`https://tu-api.com/recetas?tipo=${mealType}`);
-        const data = await response.json();
-        this.recipes = data;
-      } catch (error) {
-        console.error("Error al obtener recetas:", error);
-      }
-    },
+    // async fetchRecipesByMealType() {
+    //   const mealType = this.getMealType();
+    //   try {
+    //     const response = await fetch(`https://tu-api.com/recetas?tipo=${mealType}`);
+    //     const data = await response.json();
+    //     this.recipes = data;
+    //   } catch (error) {
+    //     console.error("Error al obtener recetas:", error);
+    //   }
+    // },
   },
-  mounted() {
-    this.fetchRecipesByMealType();
-  },
+  // mounted() {
+  //   this.fetchRecipesByMealType();
+  // },
 };
 </script>
 
