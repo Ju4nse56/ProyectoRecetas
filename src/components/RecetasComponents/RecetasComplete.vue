@@ -19,9 +19,22 @@
         <p class="description">{{ receta.description }}</p>
 
         <div class="prep-time">
-          <strong>{{ receta.preparation_time }} </strong>
-          <div>
-            {{ receta.categories }}
+          <strong>{{ receta.preparation_time }} min</strong>
+          <h4>Categorias</h4>
+          <div
+            class="vfor"
+            v-for="category in receta.categories"
+            :key="category.id"
+          >
+            <div>
+              {{ category }}
+            </div>
+          </div>
+          <h4>Etiquetas</h4>
+          <div class="vfor" v-for="label in receta.labels" :key="label.id">
+            <div>
+              {{ label }}
+            </div>
           </div>
         </div>
 
@@ -48,12 +61,22 @@
           <input
             type="text"
             placeholder="Agregar un comentario"
-            v-model="comment"
+            v-model="rates.comment"
           />
-          <button @click="submitComment">Enviar</button>
+          <input type="number" max="5" min="0" required v-model="rates.rate" />
+          <button @click="rating">Enviar</button>
         </div>
       </section>
+
       <br /><br /><br />
+
+      <div class="vfor" v-for="comment in receta.comments" :key="comment.id" style="border: black 2px solid;">
+        <div class="cube">
+          <p>{{ comment.user_name }}: </p>
+          <p>{{ comment.comment }}</p>
+          <p>{{ comment.rate }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -67,6 +90,10 @@ export default {
     return {
       id: 0,
       receta: {},
+      rates: {
+        comment: "",
+        rate: 0,
+      },
     };
   },
   methods: {
@@ -85,6 +112,34 @@ export default {
       } catch (error) {
         console.error(error);
         this.error = "Error al cargar las recetas.";
+      }
+    },
+
+    rating: async function () {
+      try {
+        const url = "http://127.0.0.1:8000/api/recipes/" + this.id + "/rating";
+        const response = await this.axios.post(url, this.rates, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.data.status === 200) {
+          this.getReceta();
+        } else {
+          alert(response.data.message);
+          console.log(response.data.error);
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          alert(error.response.data.message || "Error en la solicitud") +
+            (error.response.data.errors
+              ? ": " + JSON.stringify(error.response.data.errors)
+              : "");
+        } else {
+          this.error = "Error en la solicitud";
+        }
+      } finally {
+        console.log("Proceso terminado");
       }
     },
   },
