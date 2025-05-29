@@ -1,15 +1,15 @@
 <template>
-  <div class="card" @click="getReceta(id)">
-    <div class="card-content">
+  <div class="card">
+    <div class="card-content" @click="getReceta(id)">
       <div class="recipe-title">{{ tittle }}</div>
       <div class="recipe-description">
         <div class="recipe-time">
-          <img class="time-icon" src="@/assets/imgRecetas/time.png" alt="tiempo" />
+          <img class="time-icon" src="@/assets/imgRecetas/time.png" alt="tiempo"/>
           <span>{{preparation_time}} min</span>
         </div>
       </div>
       <div class="favorite-button">
-        <img :src="require('@/assets/imgMenu/favorite.png')" alt="Favorito" />
+        <img :src="require('@/assets/imgMenu/favorite.png')" alt="Favorito" @click="setFavorite(id)"/>
       </div>
       <div class="card-image">
         <img class="recipe-image" :src="image" :alt="tittle" />
@@ -33,6 +33,34 @@ export default {
     getReceta: function (id) {
       this.$router.push('/receta/' + id);
     },
+
+    setFavorite: async function (id) {
+      try {
+            const response = await this.axios.post(
+                "http://127.0.0.1:8000/api/recipes/"+id+"/toggle-favorite",
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
+            );
+            
+            if (response.data.status === 200) {
+                // Actualizar el estado en la interfaz
+                this.updateRecipeFavoriteStatus(id, response.data.is_favorite);
+                
+                // Mostrar mensaje
+                alert(response.data.message);
+                
+                return response.data;
+            }
+        } catch (error) {
+            console.error('Error al cambiar favorito:', error);
+            alert('Error al actualizar favorito');
+            return null;
+        }
+    }
   }
 }
 </script>
